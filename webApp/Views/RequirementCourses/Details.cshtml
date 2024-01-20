@@ -1,0 +1,36 @@
+﻿@model webApp.Models.RequirementCourse
+
+@{
+    ViewData["Title"] = "Regulation Course Details";
+}
+
+<h1>Regulation Course Details </h1>
+
+<div>
+   
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.IsCompulsory)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.IsCompulsory)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Requirement)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Requirement.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Course)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Course.CourseTitle)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { reqId = Model.RequirementId, courseCode = Model.CourseCode }) |
+    <a asp-action="Index">Back to List</a>
+</div>

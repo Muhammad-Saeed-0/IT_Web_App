@@ -1,0 +1,82 @@
+﻿@model webApp.Models.Requirement
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Requirement</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RegulationCode" class="control-label"></label>
+                <select asp-for="RegulationCode" class ="form-control" asp-items="ViewBag.RegulationCode"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+
+            <br />
+            <br />
+            <h2> Courses </h2>
+            <div class="form-group">
+                <div>
+                    <table class="table">
+                        <tr>
+                            <th> Select </th>
+                            <th>
+                                Course Title
+                            </th>
+                            <th>
+                                Is Compulsory
+                            </th>
+                        </tr>
+                        @foreach (var course in ViewBag.Courses)
+                        {
+                            <tr>
+                                <td>
+                                    <input type="checkbox"
+                                           name="selectedCourses"
+                                           value="@course.Code"
+                                           class="check" />
+                                </td>
+                                <td>
+                                    @course.CourseTitle
+                                </td>
+                                <td>
+                                    <input type="checkbox"
+                                           name="isCompulsory"
+                                           value="@course.Code"
+                                           class="check" />
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+<br />
+<br />
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

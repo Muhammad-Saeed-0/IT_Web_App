@@ -1,0 +1,53 @@
+﻿@model IEnumerable<webApp.Models.Research>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>All Researches</h1>
+
+
+<a asp-action="Create" class="btn btn-danger m-5 d-block w-25">Create New Research</a>
+
+@{
+    if (Model != null && Model.ToList().Count > 0)
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Author)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateOfPublication)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Author)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateOfPublication)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <img src="~/images/static_img/No Data Found.jpg" alt="No Data Found" class="w-25 m-auto  d-block border border-2 border-danger" />
+    }
+}
+
+

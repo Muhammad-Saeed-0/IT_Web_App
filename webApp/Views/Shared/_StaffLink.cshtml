@@ -1,0 +1,54 @@
+﻿@model webApp.Models.Staff
+
+<div class="m-2 p-3 border border-danger border-3">
+
+    <h2>The Member Links Info.</h2>
+
+    <a asp-controller="StaffLinks" asp-action="Create" asp-route-staffId="@Model?.Id" class="btn btn-danger m-4 d-block w-50 m-auto">
+        Create New Link
+    </a>
+
+
+
+    @{
+        if (Model.StaffLinks != null && Model.StaffLinks.Count > 0)
+        {
+            <table class="table table-striped text-center">
+                <thead>
+                    <tr>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Date
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.StaffLinks)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                <a href="@Html.DisplayFor(modelItem => item.Link)">Go to @Html.DisplayFor(modelItem => item.Title) </a>
+                            </td>
+                            <td>
+                                <a asp-controller="StaffLinks" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-controller="StaffLinks" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <center>
+                <img src="~/images/static_img/No Data Found.jpg" alt="No Data Found" class="w-25 m-3  d-block border border-2 border-danger" />
+            </center>
+        }
+    }
+</div>

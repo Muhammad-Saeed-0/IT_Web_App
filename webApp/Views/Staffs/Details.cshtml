@@ -1,0 +1,120 @@
+﻿@model webApp.Models.Staff
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<center>
+    <h1 class="m-3">The Member Details</h1>
+</center>
+
+<div class="row-fluid">
+    <div class="m-2 p-3 border border-danger border-3">
+
+        <h2>Personal Info.</h2>
+
+        <table class="table table-striped text-center">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Name)
+                </td>
+            </tr> 
+            <tr>
+                <th class="align-middle">
+                    @Html.DisplayNameFor(model => model.PersonalImgUrl)
+                </th>
+                <td>
+                    <img src="@Model.PersonalImgUrl" alt="PersonalImg" class="w-25" />
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Job)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Job)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Degree)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Degree)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Major)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Major)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Email)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Phone)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Phone)
+                </td>
+            </tr>
+            <tr>
+                <th class="align-middle">
+                    @Html.DisplayNameFor(model => model.PersonalInfo)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.PersonalInfo)
+                </td>
+            </tr> 
+            <tr>
+                <td colspan="2">
+                    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary m-2 w-25">
+                        Edit
+                        </a> |
+
+                    <a asp-action="Index" class="btn btn-dark m-2 w-25">
+                        Back to List
+                        </a>
+                </td>
+            </tr>
+           
+        </table>
+    </div>
+</div>
+
+
+<div class="row-fluid">
+    <div class="span4 well-border">
+        @{
+            await Html.RenderPartialAsync("~/Views/Shared/_Education.cshtml", Model);
+        }
+    </div>
+</div>
+
+<div class="row-fluid">
+    <div class="span4 well-border">
+        @{
+            await Html.RenderPartialAsync("~/Views/Shared/_ScientificAchievement.cshtml", Model);
+        }
+    </div>
+</div>
+
+<div class="row-fluid">
+    <div class="span4 well-border">
+        @{
+            await Html.RenderPartialAsync("~/Views/Shared/_StaffLink.cshtml", Model);
+        }
+    </div>
+</div>

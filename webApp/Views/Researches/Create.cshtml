@@ -1,0 +1,56 @@
+﻿@model webApp.Models.Research
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create a Research</h1>
+
+<div class="row">
+    <div class="col-md-6 m-4">
+        <form asp-action="Create" enctype="multipart/form-data" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group p-2">
+                <label asp-for="Author" class="control-label"></label>
+                <input asp-for="Author" class="form-control" />
+                <span asp-validation-for="Author" class="text-danger"></span>
+            </div>
+            <div class="form-group p-2">
+                <label asp-for="CoAuthor" class="control-label"></label>
+                <textarea cols="5" rows="5" asp-for="CoAuthor" class="form-control"></textarea>
+                <span asp-validation-for="CoAuthor" class="text-danger"></span>
+            </div> 
+            <div class="form-group p-2">
+                <label asp-for="Supervisors" class="control-label"></label>
+                <textarea cols="5" rows="5" asp-for="Supervisors" class="form-control"></textarea>
+                <span asp-validation-for="Supervisors" class="text-danger"></span>
+            </div>
+            <div class="form-group p-2">
+                <label asp-for="DateOfPublication" class="control-label"></label>
+                <input asp-for="DateOfPublication" class="form-control" type="date"/>
+                <span asp-validation-for="DateOfPublication" class="text-danger"></span>
+            </div> 
+            <div class="form-group p-2">
+                <label asp-for="Abstract" class="control-label"></label>
+                <textarea cols="5" rows="5" asp-for="Abstract" class="form-control"></textarea>
+                <span asp-validation-for="Abstract" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group p-2">
+                <label asp-for="PdfUrl" class="control-label"></label>
+                <input class="form-control" accept="application/pdf" type="file" name="file" id="upFile1" />
+                <span asp-validation-for="PdfUrl" class="text-danger"></span>
+            </div>
+             
+            <div class="form-group p-2">
+                <input type="submit" value="Create" class="btn btn-primary m-5 w-25 m-auto" /> |
+                <a asp-action="Index" class="btn btn-dark m-5 w-25 m-auto">Back to List</a>
+            </div>
+           
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

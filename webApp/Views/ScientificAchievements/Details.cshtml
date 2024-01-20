@@ -1,0 +1,49 @@
+﻿@model webApp.Models.ScientificAchievement
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1> The Scientific Achievement Details</h1>
+
+<div class="row-fluid">
+    <div class="m-2 p-3 border border-danger border-3">
+        <table class="table table-striped text-center">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Title)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Title)
+                </td>
+            </tr>
+            <tr>
+                <th class="align-middle">
+                    @Html.DisplayNameFor(model => model.Date)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Date)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Description)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary m-2 w-25">
+                        Edit
+                    </a> |
+
+                    <a asp-controller="Staffs" asp-action="Details" asp-route-id="@Model.StaffId" class="btn btn-dark m-2 w-25">Back to Details</a>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</div>
+

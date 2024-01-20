@@ -1,0 +1,113 @@
+﻿@model IEnumerable<webApp.Models.Course>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<br />
+@* <h2 class="w-50 m-auto">Basic Computing Sciences</h2> *@
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prerequisite)
+            </th>
+            @* <th>
+            @Html.DisplayNameFor(model => model.IsBasic)
+            </th> *@
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            @*  if (item.IsBasic == true)
+        { *@
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseTitle)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prerequisite)
+                </td>
+                @*  <td>
+            @Html.DisplayFor(modelItem => item.IsBasic)
+            </td> *@
+                <td>
+                    <a asp-action="Edit" asp-route-code="@item.Code">Edit</a> |
+                    <a asp-action="Details" asp-route-code="@item.Code">Details</a> |
+                    <a asp-action="Delete" asp-route-code="@item.Code">Delete</a>
+                </td>
+            </tr>
+            @* } *@
+        }
+    </tbody>
+</table>
+
+<br />
+@* <h2 class="w-50 m-auto">General Requirements</h2>
+<br />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CourseTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prerequisite)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IsBasic)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            if (item.IsBasic == false)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Code)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CourseTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Prerequisite)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsBasic)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-code="@item.Code">Edit</a> |
+                        <a asp-action="Details" asp-route-code="@item.Code">Details</a> |
+                        <a asp-action="Delete" asp-route-code="@item.Code">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+ *@

@@ -1,0 +1,135 @@
+﻿@model webApp.Models.Requirement
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Requirement</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Regulation)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Regulation.Code)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+<br />
+<br />
+
+
+<h3> Compulsory Courses </h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Course Code
+            </th>
+            <th>
+                Course Title
+            </th>
+            <th>
+                Is Compulsory
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.RequirementCourses)
+        {
+            if (item.IsCompulsory == true)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CourseCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course.CourseTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsCompulsory)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "RequirementCourses", new { reqId = item.RequirementId, courseCode = item.CourseCode }) |
+
+                        @Html.ActionLink("Details", "Details", "RequirementCourses", new { reqId = item.RequirementId, courseCode = item.CourseCode }) |
+
+                        @Html.ActionLink("Delete", "Delete", "RequirementCourses", new { reqId = item.RequirementId, courseCode = item.CourseCode })
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<br />
+
+<h3> Elective Courses </h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Course Code
+            </th>
+            <th>
+                Course Title
+            </th>
+            <th>
+                Is Compulsory
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.RequirementCourses)
+        {
+            if (item.IsCompulsory == false)
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CourseCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course.CourseTitle)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsCompulsory)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "RequirementCourses", new { reqId = item.RequirementId, courseCode = item.CourseCode }) |
+
+                        @Html.ActionLink("Details", "Details", "RequirementCourses", new { reqId = item.RequirementId, courseCode = item.CourseCode }) |
+
+                        @Html.ActionLink("Delete", "Delete", "RequirementCourses", new { reqId = item.RequirementId, courseCode = item.CourseCode })
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<br />

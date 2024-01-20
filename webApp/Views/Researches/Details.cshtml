@@ -1,0 +1,77 @@
+﻿@model webApp.Models.Research
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<center>
+    <h1 class="m-3">The Research Details</h1>
+</center>
+
+<div class="row-fluid">
+    <div class="m-2 p-3 border border-danger border-3">
+
+        <table class="table table-striped text-center">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Author)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Author)
+                </td>
+            </tr>  
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateOfPublication)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.DateOfPublication)
+                </td>
+            </tr> 
+            <tr>
+                <th class="align-middle">
+                    @Html.DisplayNameFor(model => model.CoAuthor)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.CoAuthor)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Supervisors)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Supervisors)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Abstract)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Abstract)
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.PdfUrl)
+                </th>
+                <td>
+                    <a href="@Html.DisplayFor(model => model.PdfUrl)">Open the Research</a>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-primary m-2 w-25">
+                        Edit
+                        </a> |
+
+                    <a asp-action="Index" class="btn btn-dark m-2 w-25">
+                        Back to List
+                        </a>
+                </td>
+            </tr>
+           
+        </table>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+﻿@model webApp.Models.Research
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete the Research</h1>
+
+<div class="row-fluid">
+    <div class="m-2 p-3 border border-danger border-3">
+        <table class="table table-striped text-center">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Author)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.Author)
+                </td>
+            </tr>
+            <tr>
+                <th class="align-middle">
+                    @Html.DisplayNameFor(model => model.CoAuthor)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.CoAuthor)
+                </td>
+            </tr>
+            <tr>
+                <th class="align-middle">
+                    @Html.DisplayNameFor(model => model.DateOfPublication)
+                </th>
+                <td>
+                    @Html.DisplayFor(model => model.DateOfPublication)
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <form asp-action="Delete">
+                        <input type="hidden" asp-for="Id" />
+                        <input type="submit" value="Delete" class="btn btn-danger m-2 w-25" /> |
+
+                        <a asp-action="Index" class="btn btn-dark m-2 w-25">
+                            Back to List
+                        </a>
+                    </form>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+</div>

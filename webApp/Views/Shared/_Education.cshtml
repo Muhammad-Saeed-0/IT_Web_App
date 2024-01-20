@@ -1,0 +1,55 @@
+﻿@model webApp.Models.Staff
+
+<div class="m-2 p-3 border border-danger border-3">
+
+    <h2>Education Info.</h2>
+
+    <a asp-controller="Educations" asp-action="Create" asp-route-staffId="@Model?.Id" class="btn btn-danger m-4 d-block w-50 m-auto">
+        Create New Education
+    </a>
+
+
+
+    @{
+        if (Model.Educations != null && Model.Educations.Count > 0)
+        {
+            <table class="table table-striped text-center">
+                <thead>
+                    <tr>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Date
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Educations)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Title)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Date)
+                            </td>
+                            <td>
+                                <a asp-controller="Educations" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                                <a asp-controller="Educations" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                                <a asp-controller="Educations" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <center>
+                <img src="~/images/static_img/No Data Found.jpg" alt="No Data Found" class="w-25 m-3  d-block border border-2 border-danger" />
+            </center>
+        }
+    }
+</div>

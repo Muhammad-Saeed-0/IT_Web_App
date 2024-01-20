@@ -1,0 +1,38 @@
+﻿@model webApp.Models.StaffLink
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit the Link</h1>
+
+<div class="row">
+    <div class="col-md-6 m-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            
+            <input type="hidden" asp-for="Id" />
+            <input asp-for="StaffId" asp-items="ViewBag.StaffId" type="hidden" />
+
+            <div class="form-group p-2">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group p-2">
+                <label asp-for="Link" class="control-label"></label>
+                <input asp-for="Link" class="form-control" />
+                <span asp-validation-for="Link" class="text-danger"></span>
+            </div>
+             
+            <div class="form-group p-2">
+                <input type="submit" value="Save" class="btn btn-primary m-5 w-25 m-auto" /> |
+                <a asp-controller="Staffs" asp-action="Details" asp-route-id="@ViewBag.StaffId" class="btn btn-dark m-5 w-25 m-auto">Back to Details</a>
+            </div>
+        </form>
+    </div>
+</div>
+ 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,66 @@
+﻿@model webApp.Models.Staff
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create a Personal Info.</h1>
+
+<div class="row">
+    <div class="col-md-6 m-4">
+        <form asp-action="Create" enctype="multipart/form-data" >
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group p-2">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group p-2">
+                <label asp-for="Job" class="control-label"></label>
+                <input asp-for="Job" class="form-control" />
+                <span asp-validation-for="Job" class="text-danger"></span>
+            </div>
+            <div class="form-group p-2">
+                <label asp-for="Degree" class="control-label"></label>
+                <input asp-for="Degree" class="form-control" />
+                <span asp-validation-for="Degree" class="text-danger"></span>
+            </div>
+            <div class="form-group p-2">
+                <label asp-for="Major" class="control-label"></label>
+                <input asp-for="Major" class="form-control" />
+                <span asp-validation-for="Major" class="text-danger"></span>
+            </div>
+           
+            <div class="form-group p-2">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group p-2">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group p-2">
+                <label asp-for="PersonalImgUrl" class="control-label"></label>
+                <input class="form-control" accept="image/*" type="file" name="image" id="upFile1" />
+                <span asp-validation-for="PersonalImgUrl" class="text-danger"></span>
+            </div>
+             <div class="form-group p-2">
+                <label asp-for="PersonalInfo" class="control-label"></label>
+                <textarea cols="5" rows="5" asp-for="PersonalInfo" class="form-control" ></textarea>
+                <span asp-validation-for="PersonalInfo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group p-2">
+                <input type="submit" value="Create" class="btn btn-primary m-5 w-25 m-auto" /> |
+                <a asp-action="Index" class="btn btn-dark m-5 w-25 m-auto">Back to List</a>
+            </div>
+           
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

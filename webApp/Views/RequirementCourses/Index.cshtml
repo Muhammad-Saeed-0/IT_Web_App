@@ -1,0 +1,49 @@
+﻿@model IEnumerable<webApp.Models.RequirementCourse>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New Requirement Course</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IsCompulsory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Requirement)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsCompulsory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Requirement.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course.CourseTitle)
+            </td>
+            <td>
+                    @Html.ActionLink("Edit", "Edit", new { reqId = item.RequirementId, courseCode = item.CourseCode }) |
+
+                    @Html.ActionLink("Details", "Details", new { reqId = item.RequirementId, courseCode = item.CourseCode }) |
+
+                    @Html.ActionLink("Delete", "Delete", new { reqId = item.RequirementId, courseCode = item.CourseCode })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
