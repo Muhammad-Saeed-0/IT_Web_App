@@ -1,31 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using webApp.Data;
 using webApp.Models;
+using webApp.Repository.Contracts;
 
 namespace webApp.Controllers
 {
     public class EventsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IMainRepository _db;
+        private readonly IWebHostEnvironment _webHost;
 
-        public EventsController(ApplicationDbContext context)
+        public EventsController(IMainRepository db, IWebHostEnvironment webHost)
         {
-            _context = context;
+            _db = db;
+            _webHost = webHost;
         }
 
-        // GET: Events
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Events.ToListAsync());
+            return View(await _db._eventRepository.GetAllAsync());
         }
 
-        // GET: Events/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +28,35 @@ namespace webApp.Controllers
                 return NotFound();
             }
 
-            var @event = await _context.Events
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (@event == null)
+            var entity = await _db._eventRepository.GetAsync(
+                expression: m => m.Id == id);
+            if (entity == null)
             {
                 return NotFound();
             }
 
-            return View(@event);
+            return View(entity);
         }
 
-        // GET: Events/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Events/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Date,StartAt,EndAt,Address,ImgUrl,Description")] Event @event)
+        public async Task<IActionResult> Create(Event entity, IFormFile image)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(@event);
-                await _context.SaveChangesAsync();
+                entity.Image = image;
+
+                await _db._eventRepository.CreateAsync(entity);
                 return RedirectToAction(nameof(Index));
             }
-            return View(@event);
+            return View(entity);
         }
 
-        // GET: Events/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +64,19 @@ namespace webApp.Controllers
                 return NotFound();
             }
 
-            var @event = await _context.Events.FindAsync(id);
-            if (@event == null)
+            var entity = await _db._eventRepository.GetAsync(m => m.Id == id);
+            if (entity == null)
             {
                 return NotFound();
             }
-            return View(@event);
+            return View(entity);
         }
 
-        // POST: Events/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Date,StartAt,EndAt,Address,ImgUrl,Description")] Event @event)
+        public async Task<IActionResult> Edit(int id, Event entity, IFormFile image)
         {
-            if (id != @event.Id)
+            if (id != entity.Id)
             {
                 return NotFound();
             }
@@ -97,12 +85,15 @@ namespace webApp.Controllers
             {
                 try
                 {
-                    _context.Update(@event);
-                    await _context.SaveChangesAsync();
+                    entity.Image = image;
+
+                    var oldEntity = await _db._eventRepository.GetAsync(m => m.Id == id);
+
+                    await _db._eventRepository.UpdateAsync(entity, oldEntity);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EventExists(@event.Id))
+                    if (_db._eventRepository.GetAsync(m => m.Id == id) == null)
                     {
                         return NotFound();
                     }
@@ -113,10 +104,9 @@ namespace webApp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(@event);
+            return View(entity);
         }
 
-        // GET: Events/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,34 +114,26 @@ namespace webApp.Controllers
                 return NotFound();
             }
 
-            var @event = await _context.Events
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (@event == null)
+            var entity = await _db._eventRepository.GetAsync(m => m.Id == id);
+            if (entity == null)
             {
                 return NotFound();
             }
 
-            return View(@event);
+            return View(entity);
         }
 
-        // POST: Events/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var @event = await _context.Events.FindAsync(id);
-            if (@event != null)
+            var entity = await _db._eventRepository.GetAsync(m => m.Id == id);
+            if (entity != null)
             {
-                _context.Events.Remove(@event);
+                await _db._eventRepository.DeleteAsync(entity);
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool EventExists(int id)
-        {
-            return _context.Events.Any(e => e.Id == id);
         }
     }
 }
