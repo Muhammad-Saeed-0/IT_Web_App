@@ -29,9 +29,7 @@ namespace webApp.Controllers
 
             var requirementCourse = await _db._requirementCoursesRepository
                 .GetAsync(
-                expression: m => m.RequirementId == reqId && 
-                    m.CourseCode == courseCode, 
-                
+                expression: m => m.RequirementId == reqId && m.CourseCode == courseCode, 
                 includeProperties: "Requirement,Course");
 
             if (requirementCourse == null)
@@ -44,10 +42,8 @@ namespace webApp.Controllers
 
         public IActionResult Create()
         {
-            var courses = _db._courseRepository.GetAll();
-            ViewData["CourseCode"] = new SelectList(courses, "Code", "CourseTitle");
-
-            ViewData["RegulationId"] = new SelectList(_db._requirementRepository.GetAll(), "Id", "Title");
+            ViewData["CourseCode"] = new SelectList(_db._courseRepository.GetAll(), "Code", "CourseTitle");
+            ViewData["RequirementId"] = new SelectList(_db._requirementRepository.GetAll(), "Id", "Title");
 
             return View();          
         }
@@ -63,10 +59,9 @@ namespace webApp.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            var courses = _db._courseRepository.GetAll();
-            ViewData["CourseCode"] = new SelectList(courses, "Code", requirementCourse.CourseCode);
+            ViewData["CourseCode"] = new SelectList(_db._courseRepository.GetAll(), "Code", requirementCourse.CourseCode);
 
-            ViewData["RegulationId"] = new SelectList(_db._requirementRepository.GetAll(), "Id", "Title");
+            ViewData["RequirementId"] = new SelectList(_db._requirementRepository.GetAll(), "Id", "Title", requirementCourse.RequirementId);
 
             return View(requirementCourse);
         }
@@ -80,9 +75,7 @@ namespace webApp.Controllers
 
             var regulationCourse = await _db._requirementCoursesRepository
                 .GetAsync(
-                expression: m => m.RequirementId == reqId &&
-                    m.CourseCode == courseCode,
-
+                expression: m => m.RequirementId == reqId && m.CourseCode == courseCode,
                 includeProperties: "Requirement,Course");
 
             if (regulationCourse == null)
@@ -90,10 +83,9 @@ namespace webApp.Controllers
                 return NotFound();
             }
 
-            var courses = _db._courseRepository.GetAll();
-            ViewData["CourseCode"] = new SelectList(courses, "Code", regulationCourse.CourseCode);
+            //ViewData["CourseCode"] = new SelectList(_db._courseRepository.GetAll(), "Code", regulationCourse.CourseCode);
 
-            ViewData["RegulationId"] = new SelectList(_db._requirementRepository.GetAll(), "Id", "Title");
+            //ViewData["RequirementId"] = new SelectList(_db._requirementRepository.GetAll(), "Id", "Title");
 
             return View(regulationCourse);
         }
@@ -111,9 +103,9 @@ namespace webApp.Controllers
             {
                 try
                 {
-                    var oldEntity = await _db._requirementCoursesRepository.GetAsync(m => m.RequirementId == reqId && m.CourseCode == courseCode);
+                    //var oldEntity = await _db._requirementCoursesRepository.GetAsync(m => m.RequirementId == reqId && m.CourseCode == courseCode);
 
-                    await _db._requirementCoursesRepository.UpdateAsync(requirementCourse, oldEntity);
+                    await _db._requirementCoursesRepository.UpdateAsync(requirementCourse/*, oldEntity*/);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -129,27 +121,24 @@ namespace webApp.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            var courses = _db._courseRepository.GetAll();
-            ViewData["CourseCode"] = new SelectList(courses, "Code", requirementCourse.CourseCode);
+            //ViewData["CourseCode"] = new SelectList(_db._courseRepository.GetAll(), "Code", requirementCourse.CourseCode);
 
-            ViewData["RegulationId"] = new SelectList(_db._requirementRepository.GetAll(), "Id", "Title");
+            //ViewData["RegulationId"] = new SelectList(_db._requirementRepository.GetAll(), "Id", "Title");
 
             return View(requirementCourse);
         }
 
-        public async Task<IActionResult> Delete(int reqId, string courseCode)
+        public async Task<IActionResult> Delete(int requirementId, string courseCode)
         {
-            if (reqId == 0 || courseCode == null)
+            if (requirementId == 0 || courseCode == null)
             {
                 return NotFound();
             }
 
             var regulationCourse = await _db._requirementCoursesRepository
                 .GetAsync(
-                expression: m => m.RequirementId == reqId &&
-                    m.CourseCode == courseCode,
-
-                includeProperties: "Requirement,Course"); ;
+                expression: m => m.RequirementId == requirementId && m.CourseCode == courseCode,
+                includeProperties: "Requirement,Course");
 
             if (regulationCourse == null)
             {
@@ -161,9 +150,9 @@ namespace webApp.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int reqId, string courseCode)
+        public async Task<IActionResult> DeleteConfirmed(int requirementId, string courseCode)
         {
-            var regulationCourse = await _db._requirementCoursesRepository.GetAsync(m => m.RequirementId == reqId && m.CourseCode == courseCode);
+            var regulationCourse = await _db._requirementCoursesRepository.GetAsync(m => m.RequirementId == requirementId && m.CourseCode == courseCode);
 
             if (regulationCourse != null)
             {

@@ -37,11 +37,11 @@
                 @Html.DisplayFor(modelItem => item.Course.CourseTitle)
             </td>
             <td>
-                    @Html.ActionLink("Edit", "Edit", new { reqId = item.RequirementId, courseCode = item.CourseCode }) |
+                    @Html.ActionLink("Edit", "Edit", new { requirementId = item.RequirementId, courseCode = item.CourseCode }) |
 
-                    @Html.ActionLink("Details", "Details", new { reqId = item.RequirementId, courseCode = item.CourseCode }) |
+                    @Html.ActionLink("Details", "Details", new { requirementId = item.RequirementId, courseCode = item.CourseCode }) |
 
-                    @Html.ActionLink("Delete", "Delete", new { reqId = item.RequirementId, courseCode = item.CourseCode })
+                    @Html.ActionLink("Delete", "Delete", new { requirementId = item.RequirementId, courseCode = item.CourseCode })
             </td>
         </tr>
 }

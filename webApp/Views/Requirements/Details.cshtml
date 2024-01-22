@@ -72,11 +72,11 @@
                         @Html.DisplayFor(modelItem => item.IsCompulsory)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", "RequirementCourses", new { reqId = item.RequirementId, courseCode = item.CourseCode }) |
+                        @Html.ActionLink("Edit", "Edit", "RequirementCourses", new { requirementId = item.RequirementId, courseCode = item.CourseCode }) |
 
-                        @Html.ActionLink("Details", "Details", "RequirementCourses", new { reqId = item.RequirementId, courseCode = item.CourseCode }) |
+                        @Html.ActionLink("Details", "Details", "RequirementCourses", new { requirementId = item.RequirementId, courseCode = item.CourseCode }) |
 
-                        @Html.ActionLink("Delete", "Delete", "RequirementCourses", new { reqId = item.RequirementId, courseCode = item.CourseCode })
+                        @Html.ActionLink("Delete", "Delete", "RequirementCourses", new { requirementId = item.RequirementId, courseCode = item.CourseCode })
                     </td>
                 </tr>
             }

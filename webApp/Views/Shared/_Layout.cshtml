@@ -71,9 +71,21 @@
                                 <li><a class="dropdown-item" asp-area="" asp-controller="RequirementCourses" asp-action="Index">Requirement Courses</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="StudyPlans" asp-action="Index">StudyPlans</a>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Study Plans
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+
+                                <li> <a class="dropdown-item" asp-area="" asp-controller="StudyPlans" asp-action="Index">Study Plans</a></li>
+
+                                <li><a class="dropdown-item" asp-area="" asp-controller="StudyPlanCourses" asp-action="Index">Study Plan Courses</a></li>
+
+                            </ul>
                         </li>
+
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="News" asp-action="Index">News</a>
                         </li>   

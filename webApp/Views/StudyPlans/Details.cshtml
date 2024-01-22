@@ -51,11 +51,11 @@
                     </td>
 
                     <td>
-                        @Html.ActionLink("Edit", "Edit", "StudyPlanCourses", new { stuId = item.StudyPlanId, courseCode = item.CourseCode }) |
+                        @Html.ActionLink("Edit", "Edit", "StudyPlanCourses", new { studyPlanId = item.StudyPlanId, courseCode = item.CourseCode }) |
 
-                        @Html.ActionLink("Details", "Details", "StudyPlanCourses", new { stuId = item.StudyPlanId, courseCode = item.CourseCode }) |
+                        @Html.ActionLink("Details", "Details", "StudyPlanCourses", new { studyPlanId = item.StudyPlanId, courseCode = item.CourseCode }) |
 
-                        @Html.ActionLink("Delete", "Delete", "RequirementCourses", new { stuId = item.StudyPlanId, courseCode = item.CourseCode })
+                        @Html.ActionLink("Delete", "Delete", "StudyPlanCourses", new { studyPlanId = item.StudyPlanId, courseCode = item.CourseCode })
                     </td>
                 </tr>
             }
