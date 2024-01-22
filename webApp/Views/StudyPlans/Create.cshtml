@@ -1,0 +1,84 @@
+﻿@model webApp.Models.StudyPlan
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>StudyPlan</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Level" class="control-label"></label>
+                <input asp-for="Level" class="form-control" />
+                <span asp-validation-for="Level" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+
+              <br />
+            <br />
+            <h2> Courses </h2>
+            <div class="form-group">
+                <div>
+                    <table class="table">
+                        <tr>
+                            <th> Select </th>
+                            <th>
+                                Course Title
+                            </th>
+                            <th>
+                                Semester One
+                            </th>
+                            <th>
+                                Semester Two
+                            </th>
+                        </tr>
+                        @foreach (var course in ViewBag.Courses)
+                        {
+                            <tr>
+                                <td>
+                                    <input type="checkbox"
+                                           name="selectedCourses"
+                                           value="@course.Code"
+                                           class="check" />
+                                </td>
+                                <td>
+                                    @course.CourseTitle
+                                </td>
+                                <td>
+                                    <input type="checkbox"
+                                           name="SemesterOne"
+                                           value="@course.Code"
+                                           class="check" />
+                                </td>
+                                <td>
+                                    <input type="checkbox"
+                                           name="SemesterTwo"
+                                           value="@course.Code"
+                                           class="check" />
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

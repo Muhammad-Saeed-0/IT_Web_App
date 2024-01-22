@@ -1,0 +1,109 @@
+﻿@model webApp.Models.StudyPlan
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1> Study Plan Details</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Level)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Level)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+<br />
+<br />
+<h3> First Semester Courses </h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Course Code
+            </th>
+            <th>
+                Course Title
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.StudyPlanCourses)
+        {
+
+            if (item.SemesterOne)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CourseCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course.CourseTitle)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "StudyPlanCourses", new { stuId = item.StudyPlanId, courseCode = item.CourseCode }) |
+
+                        @Html.ActionLink("Details", "Details", "StudyPlanCourses", new { stuId = item.StudyPlanId, courseCode = item.CourseCode }) |
+
+                        @Html.ActionLink("Delete", "Delete", "RequirementCourses", new { stuId = item.StudyPlanId, courseCode = item.CourseCode })
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<br />
+<br />
+
+<h3> Second Semester Courses </h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Course Code
+            </th>
+            <th>
+                Course Title
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.StudyPlanCourses)
+        {
+
+            if (item.SemesterTwo)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CourseCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Course.CourseTitle)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "StudyPlanCourses", new { stuId = item.StudyPlanId, courseCode = item.CourseCode }) |
+
+                        @Html.ActionLink("Details", "Details", "StudyPlanCourses", new { stuId = item.StudyPlanId, courseCode = item.CourseCode }) |
+
+                        @Html.ActionLink("Delete", "Delete", "RequirementCourses", new { stuId = item.StudyPlanId, courseCode = item.CourseCode })
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<br />

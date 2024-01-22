@@ -23,14 +23,19 @@ namespace webApp.Data
         {
             base.OnModelCreating(modelBuilder);
 
+            //
             modelBuilder.Entity<Staff>().HasData(
                 new Staff { Id = 1, Name = "Muhammad Saeed", Job = "Demonstrator", Degree = "Bachelor of Information Technology.", Major = "IT", Email = "muhammad.saeed@su.edu.eg", Phone = "0102222222" },
                 new Staff { Id = 2, Name = "test", Job = "test", Degree = "test", Major = "test", Email = "test2", Phone = "test1" });
 
+            //
             modelBuilder.Entity<Staff>().HasIndex(p => new { p.Email }).IsUnique();
             modelBuilder.Entity<Staff>().HasIndex(p => new { p.Phone }).IsUnique();
+            modelBuilder.Entity<StudyPlan>().HasIndex(p => new { p.Level }).IsUnique();
 
+            //
             modelBuilder.Entity<RequirementCourse>().HasKey(p => new { p.CourseCode, p.RequirementId });
+            modelBuilder.Entity<StudyPlanCourse>().HasKey(p => new { p.CourseCode, p.StudyPlanId });
         }
     }
 }

@@ -30,6 +30,11 @@ namespace webApp.Controllers
                 expression: m => m.Code == code,
                 includeProperties: "Requirements");
 
+            if (regulation == null)
+            {
+                return NotFound();
+            }
+
             if (regulation.Requirements != null && regulation.Requirements.Count > 0)
             {
                 foreach (var item in regulation.Requirements)
@@ -39,53 +44,22 @@ namespace webApp.Controllers
                         includeProperties: "Course");
                 }
             }
-
-            if (regulation == null)
-            {
-                return NotFound();
-            }
-
+             
             return View(regulation);
         }
 
         public IActionResult Create()
         {
-            //ViewBag.Courses = _db._courseRepository.GetAll().ToList();
-
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Regulation regulation/*, string[] selectedCourses, string[] isCompulsory*/)
+        public async Task<IActionResult> Create(Regulation regulation)
         {
             if (ModelState.IsValid)
             {
                 await _db._regulationRepository.CreateAsync(regulation);
-
-                //if (selectedCourses != null)
-                //{
-                //    var regulationCourse = new RegulationCourse();
-                //    int c = 0;
-                //    foreach (var item in selectedCourses)
-                //    {
-                //        regulationCourse.RegulationCode = regulation.Code;
-                //        regulationCourse.CourseCode = item;
-
-                //        if (c < isCompulsory.Length && isCompulsory[c] != null)
-                //        {
-                //            regulationCourse.IsCompulsory = true;
-                //            ++c;
-                //        }
-                //        else
-                //        {
-                //            regulationCourse.IsCompulsory = false;
-                //        }
-
-                //        await _db._regulationCoursesRepository.CreateAsync(regulationCourse);
-                //    }
-
-                //}
 
                 return RedirectToAction(nameof(Index));
             }

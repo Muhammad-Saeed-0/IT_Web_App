@@ -31,17 +31,17 @@ namespace webApp.Controllers
                 r => r.Id == id, 
                 includeProperties: "RequirementCourses,Regulation");
 
+            if (requirement == null)
+            {
+                return NotFound();
+            }
+
             if (requirement.RequirementCourses != null && requirement.RequirementCourses.Count > 0)
             {
                 foreach (var item in requirement.RequirementCourses)
                 {
                     item.Course = await _db._courseRepository.GetAsync(m => m.Code == item.CourseCode);
                 }
-            }
-
-            if (requirement == null)
-            {
-                return NotFound();
             }
 
             return View(requirement);
@@ -74,7 +74,7 @@ namespace webApp.Controllers
                         reqCourse.RequirementId = requirement.Id;
                         reqCourse.CourseCode = item;
 
-                        if (c < isCompulsory.Length && isCompulsory[c] != null)
+                        if (c < isCompulsory.Length && isCompulsory[c] == reqCourse.CourseCode)
                         {
                             reqCourse.IsCompulsory = true;
                             ++c;
