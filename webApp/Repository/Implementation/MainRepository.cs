@@ -19,7 +19,8 @@ namespace webApp.Repository.Implementation
             _requirementRepository = new RequirementRepository(db);
             _requirementCoursesRepository = new RequirementCoursesRepository(db);
             _eventRepository = new EventRepository(db, webHost);
-
+            _studyPlanRepository = new StudyPlanRepository(db);
+            _studyPlanCoursesRepository = new StudyPlanCoursesRepository(db);
         }
 
         public IStaffRepository _staffRepository { get; private set; }
@@ -34,6 +35,8 @@ namespace webApp.Repository.Implementation
         public IRequirementRepository _requirementRepository { get; private set; }
         public IRequirementCoursesRepository _requirementCoursesRepository { get; private set; }
         public IEventRepository _eventRepository { get; private set; }
+        public IStudyPlanRepository _studyPlanRepository { get; private set; }
+        public IStudyPlanCoursesRepository _studyPlanCoursesRepository { get; private set; }
     }
 }
 

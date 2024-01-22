@@ -14,5 +14,7 @@
         IRequirementRepository _requirementRepository { get; }
         IRequirementCoursesRepository _requirementCoursesRepository { get; }
         IEventRepository _eventRepository { get; }
+        IStudyPlanRepository _studyPlanRepository { get; }
+        IStudyPlanCoursesRepository _studyPlanCoursesRepository { get; }
     }
 }

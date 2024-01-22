@@ -16,7 +16,8 @@ namespace webApp.Data
         public DbSet<StaffLink> StaffLinks { get; set; }
         public DbSet<ScientificAchievement> ScientificAchievements { get; set; }
         public DbSet<RequirementCourse> RequirementCourses { get; set; }
-
+        public DbSet<StudyPlan> StudyPlans { get; set; }
+        public DbSet<StudyPlanCourse> StudyPlanCourses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
