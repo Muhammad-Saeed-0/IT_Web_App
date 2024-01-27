@@ -14,7 +14,7 @@ namespace webApp.Models
         [DisplayName("L")]
         public int Lecture { get; set; }
         [DisplayName("P/T")]
-        public int Practical_Tutorial { get; set; }
+        public int PracticalTutorial { get; set; }
         public int Total { get; set; }
         public string Prerequisite { get; set; }
         [DisplayName("CW")]
@@ -24,10 +24,9 @@ namespace webApp.Models
         [DisplayName("F.E")]
         public int FinalExam { get; set; }
         [DisplayName("Oral/P")]
-        public int Oral_Practical { get; set; }
+        public int OralPractical { get; set; }
         [DisplayName("Exam Time (hr)")]
         public int ExamTime { get; set; }
-        //public bool IsBasic { get; set; }
 
         public ICollection<RequirementCourse> RequirementCourses { get; set; }
     }

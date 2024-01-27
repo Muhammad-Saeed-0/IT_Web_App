@@ -42,10 +42,10 @@ namespace webApp.Migrations
                     b.Property<int>("Lecture")
                         .HasColumnType("int");
 
-                    b.Property<int>("Oral_Practical")
+                    b.Property<int>("OralPractical")
                         .HasColumnType("int");
 
-                    b.Property<int>("Practical_Tutorial")
+                    b.Property<int>("PracticalTutorial")
                         .HasColumnType("int");
 
                     b.Property<string>("Prerequisite")
@@ -60,6 +60,120 @@ namespace webApp.Migrations
                     b.HasKey("Code");
 
                     b.ToTable("Courses");
+
+                    b.HasData(
+                        new
+                        {
+                            Code = "CSW 110",
+                            CourseTitle = "Introduction to Computer & Internet Technology",
+                            CourseWork = 5,
+                            ExamTime = 3,
+                            FinalExam = 60,
+                            Lecture = 2,
+                            OralPractical = 10,
+                            PracticalTutorial = 2,
+                            Prerequisite = "No Prerequisite",
+                            TermExams = 25,
+                            Total = 3
+                        },
+                        new
+                        {
+                            Code = "Hu 110",
+                            CourseTitle = "English Language",
+                            CourseWork = 15,
+                            ExamTime = 2,
+                            FinalExam = 60,
+                            Lecture = 2,
+                            OralPractical = 0,
+                            PracticalTutorial = 2,
+                            Prerequisite = "No Prerequisite",
+                            TermExams = 25,
+                            Total = 3
+                        },
+                        new
+                        {
+                            Code = "CSW 232",
+                            CourseTitle = "Computer Programming (1)",
+                            CourseWork = 5,
+                            ExamTime = 3,
+                            FinalExam = 60,
+                            Lecture = 3,
+                            OralPractical = 10,
+                            PracticalTutorial = 2,
+                            Prerequisite = "CSW 110 Introduction to Computer & Internet Technology",
+                            TermExams = 25,
+                            Total = 4
+                        },
+                        new
+                        {
+                            Code = "Hu 111",
+                            CourseTitle = "Composition + Technical Writing",
+                            CourseWork = 15,
+                            ExamTime = 3,
+                            FinalExam = 60,
+                            Lecture = 3,
+                            OralPractical = 0,
+                            PracticalTutorial = 0,
+                            Prerequisite = "No Prerequisite",
+                            TermExams = 25,
+                            Total = 3
+                        },
+                        new
+                        {
+                            Code = "CSW 221",
+                            CourseTitle = "Data Structure",
+                            CourseWork = 5,
+                            ExamTime = 3,
+                            FinalExam = 60,
+                            Lecture = 2,
+                            OralPractical = 10,
+                            PracticalTutorial = 2,
+                            Prerequisite = "Ma 110 Linear Algebra",
+                            TermExams = 25,
+                            Total = 3
+                        },
+                        new
+                        {
+                            Code = "CSW 234",
+                            CourseTitle = "Computer Programming (2)",
+                            CourseWork = 15,
+                            ExamTime = 3,
+                            FinalExam = 60,
+                            Lecture = 2,
+                            OralPractical = 0,
+                            PracticalTutorial = 2,
+                            Prerequisite = "CSW 241 File Organization & Processing",
+                            TermExams = 25,
+                            Total = 3
+                        },
+                        new
+                        {
+                            Code = "CSW 242",
+                            CourseTitle = "Operating Systems (1)",
+                            CourseWork = 5,
+                            ExamTime = 3,
+                            FinalExam = 60,
+                            Lecture = 3,
+                            OralPractical = 10,
+                            PracticalTutorial = 2,
+                            Prerequisite = "CSW 232 Computer Programming (1)",
+                            TermExams = 25,
+                            Total = 4
+                        },
+                        new
+                        {
+                            Code = "Hu 212",
+                            CourseTitle = "Reading & Presentation Skills",
+                            CourseWork = 15,
+                            ExamTime = 3,
+                            FinalExam = 60,
+                            Lecture = 2,
+                            OralPractical = 0,
+                            PracticalTutorial = 0,
+                            Prerequisite = "No Prerequisite",
+                            TermExams = 25,
+                            Total = 2
+                        });
                 });
 
             modelBuilder.Entity("webApp.Models.Education", b =>
@@ -359,16 +473,6 @@ namespace webApp.Migrations
                             Major = "IT",
                             Name = "Muhammad Saeed",
                             Phone = "0102222222"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Degree = "test",
-                            Email = "test2",
-                            Job = "test",
-                            Major = "test",
-                            Name = "test",
-                            Phone = "test1"
                         });
                 });
 

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace webApp.Migrations
 {
     /// <inheritdoc />
-    public partial class add4 : Migration
+    public partial class add1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,13 +20,13 @@ namespace webApp.Migrations
                     Code = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CourseTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Lecture = table.Column<int>(type: "int", nullable: false),
-                    Practical_Tutorial = table.Column<int>(type: "int", nullable: false),
+                    PracticalTutorial = table.Column<int>(type: "int", nullable: false),
                     Total = table.Column<int>(type: "int", nullable: false),
                     Prerequisite = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CourseWork = table.Column<int>(type: "int", nullable: false),
                     TermExams = table.Column<int>(type: "int", nullable: false),
                     FinalExam = table.Column<int>(type: "int", nullable: false),
-                    Oral_Practical = table.Column<int>(type: "int", nullable: false),
+                    OralPractical = table.Column<int>(type: "int", nullable: false),
                     ExamTime = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -129,8 +129,7 @@ namespace webApp.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Level = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Semester = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Level = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -247,7 +246,9 @@ namespace webApp.Migrations
                 columns: table => new
                 {
                     CourseCode = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    StudyPlanId = table.Column<int>(type: "int", nullable: false)
+                    StudyPlanId = table.Column<int>(type: "int", nullable: false),
+                    SemesterOne = table.Column<bool>(type: "bit", nullable: false),
+                    SemesterTwo = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -292,13 +293,24 @@ namespace webApp.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "StaffMembers",
-                columns: new[] { "Id", "Degree", "Email", "Job", "Major", "Name", "PersonalImgUrl", "PersonalInfo", "Phone" },
+                table: "Courses",
+                columns: new[] { "Code", "CourseTitle", "CourseWork", "ExamTime", "FinalExam", "Lecture", "OralPractical", "PracticalTutorial", "Prerequisite", "TermExams", "Total" },
                 values: new object[,]
                 {
-                    { 1, "Bachelor of Information Technology.", "muhammad.saeed@su.edu.eg", "Demonstrator", "IT", "Muhammad Saeed", null, null, "0102222222" },
-                    { 2, "test", "test2", "test", "test", "test", null, null, "test1" }
+                    { "CSW 110", "Introduction to Computer & Internet Technology", 5, 3, 60, 2, 10, 2, "No Prerequisite", 25, 3 },
+                    { "CSW 221", "Data Structure", 5, 3, 60, 2, 10, 2, "Ma 110 Linear Algebra", 25, 3 },
+                    { "CSW 232", "Computer Programming (1)", 5, 3, 60, 3, 10, 2, "CSW 110 Introduction to Computer & Internet Technology", 25, 4 },
+                    { "CSW 234", "Computer Programming (2)", 15, 3, 60, 2, 0, 2, "CSW 241 File Organization & Processing", 25, 3 },
+                    { "CSW 242", "Operating Systems (1)", 5, 3, 60, 3, 10, 2, "CSW 232 Computer Programming (1)", 25, 4 },
+                    { "Hu 110", "English Language", 15, 2, 60, 2, 0, 2, "No Prerequisite", 25, 3 },
+                    { "Hu 111", "Composition + Technical Writing", 15, 3, 60, 3, 0, 0, "No Prerequisite", 25, 3 },
+                    { "Hu 212", "Reading & Presentation Skills", 15, 3, 60, 2, 0, 0, "No Prerequisite", 25, 2 }
                 });
+
+            migrationBuilder.InsertData(
+                table: "StaffMembers",
+                columns: new[] { "Id", "Degree", "Email", "Job", "Major", "Name", "PersonalImgUrl", "PersonalInfo", "Phone" },
+                values: new object[] { 1, "Bachelor of Information Technology.", "muhammad.saeed@su.edu.eg", "Demonstrator", "IT", "Muhammad Saeed", null, null, "0102222222" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Educations_StaffId",
@@ -346,6 +358,13 @@ namespace webApp.Migrations
                 name: "IX_StudyPlanCourses_StudyPlanId",
                 table: "StudyPlanCourses",
                 column: "StudyPlanId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudyPlans_Level",
+                table: "StudyPlans",
+                column: "Level",
+                unique: true,
+                filter: "[Level] IS NOT NULL");
         }
 
         /// <inheritdoc />

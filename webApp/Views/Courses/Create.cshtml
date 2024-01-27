@@ -27,9 +27,9 @@
                 <span asp-validation-for="Lecture" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Practical_Tutorial" class="control-label"></label>
-                <input asp-for="Practical_Tutorial" class="form-control" />
-                <span asp-validation-for="Practical_Tutorial" class="text-danger"></span>
+                <label asp-for="PracticalTutorial" class="control-label"></label>
+                <input asp-for="PracticalTutorial" class="form-control" />
+                <span asp-validation-for="PracticalTutorial" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Total" class="control-label"></label>
@@ -53,9 +53,9 @@
             </div>
             
             <div class="form-group">
-                <label asp-for="Oral_Practical" class="control-label"></label>
-                <input asp-for="Oral_Practical" class="form-control" />
-                <span asp-validation-for="Oral_Practical" class="text-danger"></span>
+                <label asp-for="OralPractical" class="control-label"></label>
+                <input asp-for="OralPractical" class="form-control" />
+                <span asp-validation-for="OralPractical" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="FinalExam" class="control-label"></label>
@@ -67,11 +67,7 @@
                 <input asp-for="ExamTime" class="form-control" />
                 <span asp-validation-for="ExamTime" class="text-danger"></span>
             </div>
-           @*  <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsBasic" /> @Html.DisplayNameFor(model => model.IsBasic)
-                </label>
-            </div> *@
+           
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
