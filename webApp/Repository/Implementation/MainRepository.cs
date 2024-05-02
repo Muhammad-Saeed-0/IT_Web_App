@@ -21,6 +21,8 @@ namespace webApp.Repository.Implementation
             _eventRepository = new EventRepository(db, webHost);
             _studyPlanRepository = new StudyPlanRepository(db);
             _studyPlanCoursesRepository = new StudyPlanCoursesRepository(db);
+            _educationalProgramRepository = new EducationalProgramRepository(db);
+            _programCoursesRepository = new ProgramCoursesRepository(db);
         }
 
         public IStaffRepository _staffRepository { get; private set; }
@@ -37,14 +39,7 @@ namespace webApp.Repository.Implementation
         public IEventRepository _eventRepository { get; private set; }
         public IStudyPlanRepository _studyPlanRepository { get; private set; }
         public IStudyPlanCoursesRepository _studyPlanCoursesRepository { get; private set; }
+        public IEducationalProgramRepository _educationalProgramRepository { get; private set; }
+        public IProgramCoursesRepository _programCoursesRepository { get; private set; }
     }
 }
-
-
-//public MainRepository(ApplicationDbContext db, IMapper mapper, UserManager<RegistrationData> userManager, IConfiguration configuration, IWebHostEnvironment webHost, IEmailSender emailSender)
-//{
-//    _governorate = new GovernorateRepository(db);
-//    _authentication = new AuthenticationRepository(mapper, userManager, configuration, emailSender);
-//    _personal = new PersonalDataRepository(db, webHost);
-
-//}

@@ -17,7 +17,7 @@ namespace webApp.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.1")
+                .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -205,6 +205,33 @@ namespace webApp.Migrations
                     b.ToTable("Educations");
                 });
 
+            modelBuilder.Entity("webApp.Models.EducationalProgram", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Department")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("RequirementId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RequirementId");
+
+                    b.ToTable("EducationalProgram");
+                });
+
             modelBuilder.Entity("webApp.Models.Event", b =>
                 {
                     b.Property<int>("Id")
@@ -288,18 +315,30 @@ namespace webApp.Migrations
                     b.ToTable("NewsImages");
                 });
 
+            modelBuilder.Entity("webApp.Models.ProgramCourse", b =>
+                {
+                    b.Property<string>("CourseCode")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("EducationalProgramId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsCompulsory")
+                        .HasColumnType("bit");
+
+                    b.HasKey("CourseCode", "EducationalProgramId");
+
+                    b.HasIndex("EducationalProgramId");
+
+                    b.ToTable("ProgramCourses");
+                });
+
             modelBuilder.Entity("webApp.Models.Regulation", b =>
                 {
                     b.Property<string>("Code")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Department")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Hours")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Program")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")
@@ -554,6 +593,17 @@ namespace webApp.Migrations
                     b.Navigation("Staff");
                 });
 
+            modelBuilder.Entity("webApp.Models.EducationalProgram", b =>
+                {
+                    b.HasOne("webApp.Models.Requirement", "Requirement")
+                        .WithMany()
+                        .HasForeignKey("RequirementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Requirement");
+                });
+
             modelBuilder.Entity("webApp.Models.NewsImages", b =>
                 {
                     b.HasOne("webApp.Models.News", "News")
@@ -563,6 +613,25 @@ namespace webApp.Migrations
                         .IsRequired();
 
                     b.Navigation("News");
+                });
+
+            modelBuilder.Entity("webApp.Models.ProgramCourse", b =>
+                {
+                    b.HasOne("webApp.Models.Course", "Course")
+                        .WithMany()
+                        .HasForeignKey("CourseCode")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("webApp.Models.EducationalProgram", "EducationalProgram")
+                        .WithMany("ProgramCourses")
+                        .HasForeignKey("EducationalProgramId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Course");
+
+                    b.Navigation("EducationalProgram");
                 });
 
             modelBuilder.Entity("webApp.Models.Requirement", b =>
@@ -637,6 +706,11 @@ namespace webApp.Migrations
             modelBuilder.Entity("webApp.Models.Course", b =>
                 {
                     b.Navigation("RequirementCourses");
+                });
+
+            modelBuilder.Entity("webApp.Models.EducationalProgram", b =>
+                {
+                    b.Navigation("ProgramCourses");
                 });
 
             modelBuilder.Entity("webApp.Models.News", b =>

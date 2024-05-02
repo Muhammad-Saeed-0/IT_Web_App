@@ -10,5 +10,6 @@
         public Regulation Regulation { get; set; }
 
         public ICollection<RequirementCourse> RequirementCourses { get; set; }
+        public ICollection<EducationalProgram> EducationalPrograms { get; set; }
     }
 }

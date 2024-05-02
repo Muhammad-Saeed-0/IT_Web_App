@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace webApp.Migrations
 {
     /// <inheritdoc />
-    public partial class add1 : Migration
+    public partial class CreateDB : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -76,9 +76,7 @@ namespace webApp.Migrations
                 {
                     Code = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Hours = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Program = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Department = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Hours = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -268,6 +266,28 @@ namespace webApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "EducationalProgram",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Department = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RequirementId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_EducationalProgram", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_EducationalProgram_Requirements_RequirementId",
+                        column: x => x.RequirementId,
+                        principalTable: "Requirements",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "RequirementCourses",
                 columns: table => new
                 {
@@ -288,6 +308,31 @@ namespace webApp.Migrations
                         name: "FK_RequirementCourses_Requirements_RequirementId",
                         column: x => x.RequirementId,
                         principalTable: "Requirements",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ProgramCourses",
+                columns: table => new
+                {
+                    CourseCode = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    EducationalProgramId = table.Column<int>(type: "int", nullable: false),
+                    IsCompulsory = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProgramCourses", x => new { x.CourseCode, x.EducationalProgramId });
+                    table.ForeignKey(
+                        name: "FK_ProgramCourses_Courses_CourseCode",
+                        column: x => x.CourseCode,
+                        principalTable: "Courses",
+                        principalColumn: "Code",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ProgramCourses_EducationalProgram_EducationalProgramId",
+                        column: x => x.EducationalProgramId,
+                        principalTable: "EducationalProgram",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -313,6 +358,11 @@ namespace webApp.Migrations
                 values: new object[] { 1, "Bachelor of Information Technology.", "muhammad.saeed@su.edu.eg", "Demonstrator", "IT", "Muhammad Saeed", null, null, "0102222222" });
 
             migrationBuilder.CreateIndex(
+                name: "IX_EducationalProgram_RequirementId",
+                table: "EducationalProgram",
+                column: "RequirementId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Educations_StaffId",
                 table: "Educations",
                 column: "StaffId");
@@ -321,6 +371,11 @@ namespace webApp.Migrations
                 name: "IX_NewsImages_NewsId",
                 table: "NewsImages",
                 column: "NewsId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ProgramCourses_EducationalProgramId",
+                table: "ProgramCourses",
+                column: "EducationalProgramId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_RequirementCourses_RequirementId",
@@ -380,6 +435,9 @@ namespace webApp.Migrations
                 name: "NewsImages");
 
             migrationBuilder.DropTable(
+                name: "ProgramCourses");
+
+            migrationBuilder.DropTable(
                 name: "RequirementCourses");
 
             migrationBuilder.DropTable(
@@ -398,7 +456,7 @@ namespace webApp.Migrations
                 name: "News");
 
             migrationBuilder.DropTable(
-                name: "Requirements");
+                name: "EducationalProgram");
 
             migrationBuilder.DropTable(
                 name: "StaffMembers");
@@ -408,6 +466,9 @@ namespace webApp.Migrations
 
             migrationBuilder.DropTable(
                 name: "StudyPlans");
+
+            migrationBuilder.DropTable(
+                name: "Requirements");
 
             migrationBuilder.DropTable(
                 name: "Regulations");

@@ -16,5 +16,7 @@
         IEventRepository _eventRepository { get; }
         IStudyPlanRepository _studyPlanRepository { get; }
         IStudyPlanCoursesRepository _studyPlanCoursesRepository { get; }
+        IEducationalProgramRepository _educationalProgramRepository { get; }
+        IProgramCoursesRepository _programCoursesRepository { get; }
     }
 }

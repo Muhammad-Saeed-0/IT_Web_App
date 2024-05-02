@@ -18,6 +18,8 @@ namespace webApp.Data
         public DbSet<RequirementCourse> RequirementCourses { get; set; }
         public DbSet<StudyPlan> StudyPlans { get; set; }
         public DbSet<StudyPlanCourse> StudyPlanCourses { get; set; }
+        public DbSet<EducationalProgram> EducationalProgram { get; set; }
+        public DbSet<ProgramCourse> ProgramCourses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -63,7 +65,9 @@ namespace webApp.Data
 
             //
             modelBuilder.Entity<RequirementCourse>().HasKey(p => new { p.CourseCode, p.RequirementId });
+            modelBuilder.Entity<ProgramCourse>().HasKey(p => new { p.CourseCode, p.EducationalProgramId });
             modelBuilder.Entity<StudyPlanCourse>().HasKey(p => new { p.CourseCode, p.StudyPlanId });
+
         }
     }
 }
