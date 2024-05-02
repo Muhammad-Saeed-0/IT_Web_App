@@ -36,99 +36,91 @@
 <br />
 <br />
 
+@{
+    if (Model.ProgramCourses != null && Model.ProgramCourses.Count > 0)
+    {
+        var compulsory = Model.ProgramCourses.Where(c => c.IsCompulsory == true).ToList();
+        var elective = Model.ProgramCourses.Where(c => c.IsCompulsory == false).ToList();
 
-<h3> Compulsory Courses </h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Course Code
-            </th>
-            <th>
-                Course Title
-            </th>
-            <th>
-                Is Compulsory
-            </th>
-
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.ProgramCourses)
+        if (compulsory != null && compulsory.Count > 0)
         {
-            if (item.IsCompulsory == true)
-            {
-                <tr>
+            <h4> Compulsory Courses </h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Course Code
+                        </th>
+                        <th>
+                            Course Title
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var progCourse in compulsory)
+                    {
+                        <tr>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CourseCode)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Course.CourseTitle)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IsCompulsory)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", "ProgramCourses", new { progId = item.EducationalProgramId, courseCode = item.CourseCode }) |
+                            <td>
+                                @Html.DisplayFor(modelItem => progCourse.CourseCode)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => progCourse.Course.CourseTitle)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "ProgramCourses", new { progId = progCourse.EducationalProgramId, courseCode = progCourse.CourseCode }) |
 
-                        @Html.ActionLink("Details", "Details", "ProgramCourses", new { progId = item.EducationalProgramId, courseCode = item.CourseCode }) |
+                                @Html.ActionLink("Details", "Details", "ProgramCourses", new { progId = progCourse.EducationalProgramId, courseCode = progCourse.CourseCode }) |
 
-                        @Html.ActionLink("Delete", "Delete", "ProgramCourses", new { progId = item.EducationalProgramId, courseCode = item.CourseCode })
-                    </td>
-                </tr>
-            }
+                                @Html.ActionLink("Delete", "Delete", "ProgramCourses", new { progId = progCourse.EducationalProgramId, courseCode = progCourse.CourseCode })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <br />
         }
-    </tbody>
-</table>
 
-<br />
-
-<h3> Elective Courses </h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Course Code
-            </th>
-            <th>
-                Course Title
-            </th>
-            <th>
-                Is Compulsory
-            </th>
-
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.ProgramCourses)
+        if (elective != null && elective.Count > 0)
         {
-            if (item.IsCompulsory == false)
-            {
-                <tr>
+            <h4> Elective Courses </h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            Course Code
+                        </th>
+                        <th>
+                            Course Title
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var progCourse in elective)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => progCourse.CourseCode)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => progCourse.Course.CourseTitle)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Edit", "Edit", "ProgramCourses", new { progId = progCourse.EducationalProgramId, courseCode = progCourse.CourseCode }) |
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CourseCode)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Course.CourseTitle)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IsCompulsory)
-                    </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", "RequirementCourses", new { progId = item.EducationalProgramId, courseCode = item.CourseCode }) |
+                                @Html.ActionLink("Details", "Details", "ProgramCourses", new { progId = progCourse.EducationalProgramId, courseCode = progCourse.CourseCode }) |
 
-                        @Html.ActionLink("Details", "Details", "RequirementCourses", new { progId = item.EducationalProgramId, courseCode = item.CourseCode }) |
+                                @Html.ActionLink("Delete", "Delete", "ProgramCourses", new { progId = progCourse.EducationalProgramId, courseCode = progCourse.CourseCode })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
 
-                        @Html.ActionLink("Delete", "Delete", "RequirementCourses", new { progId = item.EducationalProgramId, courseCode = item.CourseCode })
-                    </td>
-                </tr>
-            }
+            <br />
         }
-    </tbody>
-</table>
-
-<br />
+    }
+}
