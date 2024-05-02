@@ -1,4 +1,4 @@
-﻿@model IEnumerable<RequirementCourse>
+﻿@model IEnumerable<ProgramCourse>
 
 @{
     ViewData["Title"] = "Index";
@@ -7,7 +7,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New Requirement Course</a>
+    <a asp-action="Create">Create New Program Course</a>
 </p>
 <table class="table">
     <thead>
@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.IsCompulsory)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Requirement)
+                @Html.DisplayNameFor(model => model.EducationalProgram)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Course)
@@ -31,17 +31,17 @@
                 @Html.DisplayFor(modelItem => item.IsCompulsory)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Requirement.Title)
+                @Html.DisplayFor(modelItem => item.EducationalProgram.Title)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Course.CourseTitle)
             </td>
             <td>
-                    @Html.ActionLink("Edit", "Edit", new { requirementId = item.RequirementId, courseCode = item.CourseCode }) |
+                    @Html.ActionLink("Edit", "Edit", new { progId = item.EducationalProgramId, courseCode = item.CourseCode }) |
 
-                    @Html.ActionLink("Details", "Details", new { requirementId = item.RequirementId, courseCode = item.CourseCode }) |
+                    @Html.ActionLink("Details", "Details", new { progId = item.EducationalProgramId, courseCode = item.CourseCode }) |
 
-                    @Html.ActionLink("Delete", "Delete", new { requirementId = item.RequirementId, courseCode = item.CourseCode })
+                    @Html.ActionLink("Delete", "Delete", new { progId = item.EducationalProgramId, courseCode = item.CourseCode })
             </td>
         </tr>
 }

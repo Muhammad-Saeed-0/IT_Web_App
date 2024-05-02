@@ -1,10 +1,10 @@
-﻿@model RequirementCourse
+﻿@model ProgramCourse
 
 @{
     ViewData["Title"] = "Delete ";
 }
 
-<h1>Delete Regulation Course</h1>
+<h1>Delete Program Course</h1>
  
 <div>
  
@@ -17,10 +17,10 @@
             @Html.DisplayFor(model => model.IsCompulsory)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Requirement)
+            @Html.DisplayNameFor(model => model.EducationalProgram)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Requirement.Title)
+            @Html.DisplayFor(model => model.EducationalProgram.Title)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Course)
@@ -32,7 +32,7 @@
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="CourseCode" />
-        <input type="hidden" asp-for="RequirementId" />
+        <input type="hidden" asp-for="EducationalProgramId" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

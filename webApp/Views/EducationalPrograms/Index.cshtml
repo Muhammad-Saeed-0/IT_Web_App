@@ -1,10 +1,10 @@
-﻿@model IEnumerable<News>
+﻿@model IEnumerable<EducationalProgram>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>News</h1>
+<h1>Educational Programs</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -16,16 +16,10 @@
                 @Html.DisplayNameFor(model => model.Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Date)
+                @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Details)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IsActive)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MainImageUrl)
+                @Html.DisplayNameFor(model => model.Requirement)
             </th>
             <th></th>
         </tr>
@@ -37,16 +31,10 @@
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Date)
+                @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Details)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                    <img src="@item.MainImageUrl" alt="MainImageUrl" class="w-25" />
+                @Html.DisplayFor(modelItem => item.Requirement.Title)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

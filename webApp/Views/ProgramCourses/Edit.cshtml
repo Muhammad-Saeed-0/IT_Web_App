@@ -1,10 +1,10 @@
-﻿@model RequirementCourse
+﻿@model ProgramCourse
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit Requirement Course</h1>
+<h1>Edit Program Course</h1>
  
 <hr />
 <div class="row">
@@ -12,7 +12,7 @@
         <form asp-action="Edit">
             <div asp-validation-summary="All" class="text-danger"></div>
             <input type="hidden" asp-for="CourseCode" />
-            <input type="hidden" asp-for="RequirementId" />
+            <input type="hidden" asp-for="EducationalProgramId" />
             <div class="form-group form-check">
 
                 <label class="form-label">
@@ -21,9 +21,9 @@
                 <input class="form-control" value="@Model.Course.CourseTitle" disabled />
                 <br/>
                 <label class="form-label">
-                    @Html.DisplayNameFor(model => model.Requirement.Title)
+                    @Html.DisplayNameFor(model => model.EducationalProgram.Title)
                 </label>
-                <input class="form-control" value="@Model.Requirement.Title" disabled />
+                <input class="form-control" value="@Model.EducationalProgram.Title" disabled />
                 <br />
 
                 <label class="form-check-label">

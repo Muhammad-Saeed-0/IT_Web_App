@@ -1,4 +1,4 @@
-﻿@model webApp.Models.Education
+﻿@model Education
 
 @{
     ViewData["Title"] = "Edit";
@@ -26,15 +26,9 @@
             </div>
             <div class="form-group p-2">
                 <label asp-for="Description" class="control-label"></label>
-                @* <input asp-for="Description" class="form-control" /> *@
                 <textarea cols="5" rows="5" asp-for="Description" class="form-control"></textarea>
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-           @*  <div class="form-group">
-                <label asp-for="StaffId" class="control-label"></label>
-                <select asp-for="StaffId" class="form-control" asp-items="ViewBag.StaffId"></select>
-                <span asp-validation-for="StaffId" class="text-danger"></span>
-            </div> *@
             <div class="form-group p-2">
                 <input type="submit" value="Save" class="btn btn-primary m-5 w-25 m-auto" /> |
                 <a asp-controller="Staffs" asp-action="Details" asp-route-id="@ViewBag.StaffId" class="btn btn-dark m-5 w-25 m-auto">Back to Details</a>

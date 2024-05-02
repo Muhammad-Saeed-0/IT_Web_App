@@ -1,10 +1,10 @@
-﻿@model Requirement
+﻿@model EducationalProgram
 
 @{
     ViewData["Title"] = "Details";
 }
 
-<h1>Requirement Details</h1>
+<h1>Educational Program Details</h1>
 
 <div>
     <hr />
@@ -22,10 +22,10 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Regulation)
+            @Html.DisplayNameFor(model => model.Requirement)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Regulation.Code)
+            @Html.DisplayFor(model => model.Requirement.Title)
         </dd>
     </dl>
 </div>
@@ -55,7 +55,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.RequirementCourses)
+        @foreach (var item in Model.ProgramCourses)
         {
             if (item.IsCompulsory == true)
             {
@@ -71,11 +71,11 @@
                         @Html.DisplayFor(modelItem => item.IsCompulsory)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", "RequirementCourses", new { requirementId = item.RequirementId, courseCode = item.CourseCode }) |
+                        @Html.ActionLink("Edit", "Edit", "ProgramCourses", new { progId = item.EducationalProgramId, courseCode = item.CourseCode }) |
 
-                        @Html.ActionLink("Details", "Details", "RequirementCourses", new { requirementId = item.RequirementId, courseCode = item.CourseCode }) |
+                        @Html.ActionLink("Details", "Details", "ProgramCourses", new { progId = item.EducationalProgramId, courseCode = item.CourseCode }) |
 
-                        @Html.ActionLink("Delete", "Delete", "RequirementCourses", new { requirementId = item.RequirementId, courseCode = item.CourseCode })
+                        @Html.ActionLink("Delete", "Delete", "ProgramCourses", new { progId = item.EducationalProgramId, courseCode = item.CourseCode })
                     </td>
                 </tr>
             }
@@ -103,7 +103,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.RequirementCourses)
+        @foreach (var item in Model.ProgramCourses)
         {
             if (item.IsCompulsory == false)
             {
@@ -119,11 +119,11 @@
                         @Html.DisplayFor(modelItem => item.IsCompulsory)
                     </td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", "RequirementCourses", new { reqId = item.RequirementId, courseCode = item.CourseCode }) |
+                        @Html.ActionLink("Edit", "Edit", "RequirementCourses", new { progId = item.EducationalProgramId, courseCode = item.CourseCode }) |
 
-                        @Html.ActionLink("Details", "Details", "RequirementCourses", new { reqId = item.RequirementId, courseCode = item.CourseCode }) |
+                        @Html.ActionLink("Details", "Details", "RequirementCourses", new { progId = item.EducationalProgramId, courseCode = item.CourseCode }) |
 
-                        @Html.ActionLink("Delete", "Delete", "RequirementCourses", new { reqId = item.RequirementId, courseCode = item.CourseCode })
+                        @Html.ActionLink("Delete", "Delete", "RequirementCourses", new { progId = item.EducationalProgramId, courseCode = item.CourseCode })
                     </td>
                 </tr>
             }
