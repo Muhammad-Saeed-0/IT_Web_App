@@ -1,4 +1,4 @@
-﻿@model IEnumerable<StudyPlanCourse>
+﻿@model IEnumerable<ProgramLevelCourse>
 
 @{
     ViewData["Title"] = "Index";
@@ -19,7 +19,7 @@
                 @Html.DisplayNameFor(model => model.SemesterTwo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StudyPlan)
+                @Html.DisplayNameFor(model => model.StudyPlanProgramLevel)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Course)
@@ -37,15 +37,15 @@
                 @Html.DisplayFor(modelItem => item.SemesterTwo)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StudyPlan.Level)
+                @Html.DisplayFor(modelItem => item.StudyPlanProgramLevel.Title)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Course.CourseTitle)
             </td>
             <td>
-                    @Html.ActionLink("Edit", "Edit", new { studyPlanId = item.StudyPlanId, courseCode = item.CourseCode }) |
-                    @Html.ActionLink("Details", "Details", new { studyPlanId = item.StudyPlanId, courseCode = item.CourseCode }) |
-                    @Html.ActionLink("Delete", "Delete", new { studyPlanId = item.StudyPlanId, courseCode = item.CourseCode })
+                    @Html.ActionLink("Edit", "Edit", new { studyPlanId = item.StudyPlanProgramLevelId, courseCode = item.CourseCode }) |
+                    @Html.ActionLink("Details", "Details", new { studyPlanId = item.StudyPlanProgramLevelId, courseCode = item.CourseCode }) |
+                    @Html.ActionLink("Delete", "Delete", new { studyPlanId = item.StudyPlanProgramLevelId, courseCode = item.CourseCode })
             </td>
         </tr>
 }

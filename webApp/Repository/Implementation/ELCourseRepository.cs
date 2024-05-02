@@ -4,5 +4,5 @@ using webApp.Models;
 
 namespace webApp.Repository.Implementation
 {
-    public class StudyPlanRepository(ApplicationDbContext db) : BaseRepository<StudyPlan>(db), IStudyPlanRepository { }
+    public class ELCourseRepository(ApplicationDbContext db) : BaseRepository<EntryLevelCourse>(db), IELCourseRepository { }
 }

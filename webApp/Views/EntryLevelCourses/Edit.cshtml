@@ -1,4 +1,4 @@
-﻿@model StudyPlanCourse
+﻿@model EntryLevelCourse
 
 @{
     ViewData["Title"] = "Edit";
@@ -6,14 +6,14 @@
 
 <h1>Edit</h1>
 
-<h4>StudyPlanCourse</h4>
+<h4>Study Plan Course</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="All" class="text-danger"></div>
             <input type="hidden" asp-for="CourseCode" />
-            <input type="hidden" asp-for="StudyPlanId" />
+            <input type="hidden" asp-for="StudyPlanEntryLevelId" />
 
             <label class="form-label">
                 @Html.DisplayNameFor(model => model.Course.CourseTitle)
@@ -21,9 +21,9 @@
             <input class="form-control" value="@Model.Course.CourseTitle" disabled />
             <br />
             <label class="form-label">
-                @Html.DisplayNameFor(model => model.StudyPlan.Level)
+                @Html.DisplayNameFor(model => model.StudyPlanEntryLevel.Title)
             </label>
-            <input class="form-control" value="@Model.StudyPlan.Level" disabled />
+            <input class="form-control" value="@Model.StudyPlanEntryLevel.Title" disabled />
             <br />
             
             <div class="form-group form-check">

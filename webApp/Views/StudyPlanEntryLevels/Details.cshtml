@@ -1,4 +1,4 @@
-﻿@model StudyPlan
+﻿@model StudyPlanEntryLevel
 
 @{
     ViewData["Title"] = "Details";
@@ -10,10 +10,10 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Level)
+            @Html.DisplayNameFor(model => model.Title)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Level)
+            @Html.DisplayFor(model => model.Title)
         </dd>
     </dl>
 </div>
@@ -23,6 +23,7 @@
 </div>
 <br />
 <br />
+
 <h3> First Semester Courses </h3>
 <table class="table">
     <thead>
@@ -37,7 +38,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.StudyPlanCourses)
+        @foreach (var item in Model.EntryLevelCourses)
         {
 
             if (item.SemesterOne)
@@ -51,11 +52,11 @@
                     </td>
 
                     <td>
-                        @Html.ActionLink("Edit", "Edit", "StudyPlanCourses", new { studyPlanId = item.StudyPlanId, courseCode = item.CourseCode }) |
+                        @Html.ActionLink("Edit", "Edit", "EntryLevelCourses", new { studyPlanId = item.StudyPlanEntryLevelId, courseCode = item.CourseCode }) |
 
-                        @Html.ActionLink("Details", "Details", "StudyPlanCourses", new { studyPlanId = item.StudyPlanId, courseCode = item.CourseCode }) |
+                        @Html.ActionLink("Details", "Details", "EntryLevelCourses", new { studyPlanId = item.StudyPlanEntryLevelId, courseCode = item.CourseCode }) |
 
-                        @Html.ActionLink("Delete", "Delete", "StudyPlanCourses", new { studyPlanId = item.StudyPlanId, courseCode = item.CourseCode })
+                        @Html.ActionLink("Delete", "Delete", "EntryLevelCourses", new { studyPlanId = item.StudyPlanEntryLevelId, courseCode = item.CourseCode })
                     </td>
                 </tr>
             }
@@ -80,7 +81,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.StudyPlanCourses)
+        @foreach (var item in Model.EntryLevelCourses)
         {
 
             if (item.SemesterTwo)
@@ -94,11 +95,11 @@
                     </td>
 
                     <td>
-                        @Html.ActionLink("Edit", "Edit", "StudyPlanCourses", new { stuId = item.StudyPlanId, courseCode = item.CourseCode }) |
+                        @Html.ActionLink("Edit", "Edit", "EntryLevelCourses", new { stuId = item.StudyPlanEntryLevelId, courseCode = item.CourseCode }) |
 
-                        @Html.ActionLink("Details", "Details", "StudyPlanCourses", new { stuId = item.StudyPlanId, courseCode = item.CourseCode }) |
+                        @Html.ActionLink("Details", "Details", "EntryLevelCourses", new { stuId = item.StudyPlanEntryLevelId, courseCode = item.CourseCode }) |
 
-                        @Html.ActionLink("Delete", "Delete", "RequirementCourses", new { stuId = item.StudyPlanId, courseCode = item.CourseCode })
+                        @Html.ActionLink("Delete", "Delete", "EntryLevelCourses", new { stuId = item.StudyPlanEntryLevelId, courseCode = item.CourseCode })
                     </td>
                 </tr>
             }

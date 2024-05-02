@@ -1,4 +1,4 @@
-﻿@model StudyPlanCourse
+﻿@model EntryLevelCourse
 
 @{
     ViewData["Title"] = "Details";
@@ -23,10 +23,10 @@
             @Html.DisplayFor(model => model.SemesterTwo)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.StudyPlan)
+            @Html.DisplayNameFor(model => model.StudyPlanEntryLevel)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.StudyPlan.Level)
+            @Html.DisplayFor(model => model.StudyPlanEntryLevel.Title)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Course)
@@ -37,6 +37,6 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { studyPlanId = Model.StudyPlanId, courseCode = Model.CourseCode }) |
+    @Html.ActionLink("Edit", "Edit", new { studyPlanId = Model.StudyPlanEntryLevelId, courseCode = Model.CourseCode }) |
     <a asp-action="Index">Back to List</a>
 </div>

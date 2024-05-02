@@ -1,4 +1,4 @@
-﻿@model IEnumerable<StudyPlan>
+﻿@model IEnumerable<StudyPlanEntryLevel>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,7 +13,7 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Level)
+                @Html.DisplayNameFor(model => model.Title)
             </th>
              
             <th></th>
@@ -23,7 +23,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Level)
+                @Html.DisplayFor(modelItem => item.Title)
             </td>
             
             <td>

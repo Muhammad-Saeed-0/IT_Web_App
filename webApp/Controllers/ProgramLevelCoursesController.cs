@@ -6,18 +6,18 @@ using webApp.Repository.Contracts;
 
 namespace webApp.Controllers
 {
-    public class StudyPlanCoursesController : Controller
+    public class ProgramLevelCoursesController : Controller
     {
         private readonly IMainRepository _db;
 
-        public StudyPlanCoursesController(IMainRepository db)
+        public ProgramLevelCoursesController(IMainRepository db)
         {
             _db = db;
         }
 
         public async Task<IActionResult> Index()
         {
-            return View(await _db._studyPlanCoursesRepository.GetAllAsync(includeProperties: "StudyPlan,Course"));
+            return View(await _db._pLCourseRepository.GetAllAsync(includeProperties: "StudyPlanProgramLevel,Course"));
         }
 
         public async Task<IActionResult> Details(int studyPlanId, string courseCode)
@@ -27,44 +27,41 @@ namespace webApp.Controllers
                 return NotFound();
             }
 
-            var studyPlanCourse = await _db._studyPlanCoursesRepository
+            var requirementCourse = await _db._pLCourseRepository
                 .GetAsync(
-                expression: m => m.StudyPlanId == studyPlanId &&
-                    m.CourseCode == courseCode,
+                expression: m => m.StudyPlanProgramLevelId == studyPlanId && m.CourseCode == courseCode,
+                includeProperties: "StudyPlanProgramLevel,Course");
 
-                includeProperties: "StudyPlan,Course");
-
-            if (studyPlanCourse == null)
+            if (requirementCourse == null)
             {
                 return NotFound();
             }
 
-            return View(studyPlanCourse);
-
+            return View(requirementCourse);
         }
 
         public IActionResult Create()
         {
             ViewData["CourseCode"] = new SelectList(_db._courseRepository.GetAll(), "Code", "CourseTitle");
-            ViewData["StudyPlanId"] = new SelectList(_db._studyPlanRepository.GetAll(), "Id", "Level");
+            ViewData["StudyPlanProgramLevelId"] = new SelectList(_db._planPLRepository.GetAll(), "Id", "Title");
 
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(StudyPlanCourse studyPlanCourse)
+        public async Task<IActionResult> Create(ProgramLevelCourse studyPlanCourse)
         {
             if (ModelState.IsValid)
             {
-                await _db._studyPlanCoursesRepository.CreateAsync(studyPlanCourse);
+                await _db._pLCourseRepository.CreateAsync(studyPlanCourse);
 
                 return RedirectToAction(nameof(Index));
             }
 
             ViewData["CourseCode"] = new SelectList(_db._courseRepository.GetAll(), "Code", "CourseTitle", studyPlanCourse.CourseCode);
-            
-            ViewData["StudyPlanId"] = new SelectList(_db._studyPlanRepository.GetAll(), "Id", "Level", studyPlanCourse.StudyPlanId);
+
+            ViewData["StudyPlanProgramLevelId"] = new SelectList(_db._planPLRepository.GetAll(), "Id", "Title", studyPlanCourse.StudyPlanProgramLevelId);
 
             return View(studyPlanCourse);
         }
@@ -76,25 +73,25 @@ namespace webApp.Controllers
                 return NotFound();
             }
 
-            var studyPlanCourse = await _db._studyPlanCoursesRepository
+            var studyPlanCourse = await _db._pLCourseRepository
                 .GetAsync(
-                expression: m => m.StudyPlanId == studyPlanId && m.CourseCode == courseCode,
-                includeProperties: "StudyPlan,Course");
+                expression: m => m.StudyPlanProgramLevelId == studyPlanId && m.CourseCode == courseCode,
+                includeProperties: "StudyPlanProgramLevel,Course");
 
             if (studyPlanCourse == null)
             {
                 return NotFound();
             }
 
-          
+
             return View(studyPlanCourse);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int studyPlanId, string courseCode, StudyPlanCourse studyPlanCourse)
+        public async Task<IActionResult> Edit(int studyPlanId, string courseCode, ProgramLevelCourse studyPlanCourse)
         {
-            if (studyPlanId != studyPlanCourse.StudyPlanId || courseCode != studyPlanCourse.CourseCode)
+            if (studyPlanId != studyPlanCourse.StudyPlanProgramLevelId || courseCode != studyPlanCourse.CourseCode)
             {
                 return NotFound();
             }
@@ -103,11 +100,11 @@ namespace webApp.Controllers
             {
                 try
                 {
-                    await _db._studyPlanCoursesRepository.UpdateAsync(studyPlanCourse);
+                    await _db._pLCourseRepository.UpdateAsync(studyPlanCourse);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (await _db._studyPlanCoursesRepository.GetAsync(m => m.StudyPlanId == studyPlanId && m.CourseCode == courseCode) == null)
+                    if (await _db._pLCourseRepository.GetAsync(m => m.StudyPlanProgramLevelId == studyPlanId && m.CourseCode == courseCode) == null)
                     {
                         return NotFound();
                     }
@@ -129,10 +126,10 @@ namespace webApp.Controllers
                 return NotFound();
             }
 
-            var studyPlanCourse = await _db._studyPlanCoursesRepository
+            var studyPlanCourse = await _db._pLCourseRepository
                 .GetAsync(
-                expression: m => m.StudyPlanId == studyPlanId && m.CourseCode == courseCode,
-                includeProperties: "StudyPlan,Course"); 
+                expression: m => m.StudyPlanProgramLevelId == studyPlanId && m.CourseCode == courseCode,
+                includeProperties: "StudyPlanProgramLevel,Course");
 
             if (studyPlanCourse == null)
             {
@@ -146,12 +143,12 @@ namespace webApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int studyPlanId, string courseCode)
         {
-            var studyPlanCourse = await _db._studyPlanCoursesRepository
-                .GetAsync(expression: m => m.StudyPlanId == studyPlanId && m.CourseCode == courseCode);
+            var studyPlanCourse = await _db._pLCourseRepository
+                .GetAsync(expression: m => m.StudyPlanProgramLevelId == studyPlanId && m.CourseCode == courseCode);
 
             if (studyPlanCourse != null)
             {
-                await _db._studyPlanCoursesRepository.DeleteAsync(studyPlanCourse);
+                await _db._pLCourseRepository.DeleteAsync(studyPlanCourse);
             }
 
             return RedirectToAction(nameof(Index));

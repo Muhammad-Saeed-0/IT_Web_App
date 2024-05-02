@@ -5,18 +5,18 @@ using webApp.Repository.Contracts;
 
 namespace webApp.Controllers
 {
-    public class StudyPlansController : Controller
+    public class StudyPlanEntryLevelsController : Controller
     {
         private readonly IMainRepository _db;
 
-        public StudyPlansController(IMainRepository db)
+        public StudyPlanEntryLevelsController(IMainRepository db)
         {
             _db = db;
         }
 
         public async Task<IActionResult> Index()
         {
-            return View(await _db._studyPlanRepository.GetAllAsync());
+            return View(await _db._planELRepository.GetAllAsync());
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -26,18 +26,18 @@ namespace webApp.Controllers
                 return NotFound();
             }
 
-            var studyPlan = await _db._studyPlanRepository.GetAsync(
+            var studyPlan = await _db._planELRepository.GetAsync(
                 m => m.Id == id,
-                includeProperties: "StudyPlanCourses");
+                includeProperties: "EntryLevelCourses");
 
             if (studyPlan == null)
             {
                 return NotFound();
             }
 
-            if (studyPlan.StudyPlanCourses != null && studyPlan.StudyPlanCourses.Count > 0)
+            if (studyPlan.EntryLevelCourses != null && studyPlan.EntryLevelCourses.Count > 0)
             {
-                foreach (var item in studyPlan.StudyPlanCourses)
+                foreach (var item in studyPlan.EntryLevelCourses)
                 {
                     item.Course = await _db._courseRepository.GetAsync(m => m.Code == item.CourseCode);
                 }
@@ -55,21 +55,21 @@ namespace webApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(StudyPlan studyPlan, string[] selectedCourses, string[] SemesterOne, string[] SemesterTwo)
+        public async Task<IActionResult> Create(StudyPlanEntryLevel studyPlan, string[] selectedCourses, string[] SemesterOne, string[] SemesterTwo)
         {
             if (ModelState.IsValid)
             {
-                await _db._studyPlanRepository.CreateAsync(studyPlan);
+                await _db._planELRepository.CreateAsync(studyPlan);
 
                 if (selectedCourses != null)
                 {
-                    var stuCourse = new StudyPlanCourse();
+                    var stuCourse = new EntryLevelCourse();
                     int c1 = 0;
                     int c2 = 0;
 
                     foreach (var item in selectedCourses)
                     {
-                        stuCourse.StudyPlanId = studyPlan.Id;
+                        stuCourse.StudyPlanEntryLevelId = studyPlan.Id;
                         stuCourse.CourseCode = item;
 
                         if (c1 < SemesterOne.Length && SemesterOne[c1] == stuCourse.CourseCode)
@@ -85,7 +85,7 @@ namespace webApp.Controllers
                             ++c2;
                         }
 
-                        await _db._studyPlanCoursesRepository.CreateAsync(stuCourse);
+                        await _db._eLCourseRepository.CreateAsync(stuCourse);
                     }
 
                 }
@@ -103,7 +103,7 @@ namespace webApp.Controllers
                 return NotFound();
             }
 
-            var studyPlan = await _db._studyPlanRepository.GetAsync(s => s.Id == id);
+            var studyPlan = await _db._planELRepository.GetAsync(s => s.Id == id);
             if (studyPlan == null)
             {
                 return NotFound();
@@ -114,7 +114,7 @@ namespace webApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, StudyPlan studyPlan)
+        public async Task<IActionResult> Edit(int id, StudyPlanEntryLevel studyPlan)
         {
             if (id != studyPlan.Id)
             {
@@ -125,11 +125,11 @@ namespace webApp.Controllers
             {
                 try
                 {
-                    await _db._studyPlanRepository.UpdateAsync(studyPlan);
+                    await _db._planELRepository.UpdateAsync(studyPlan);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (await _db._studyPlanRepository.GetAsync(m => m.Id == studyPlan.Id) == null)
+                    if (await _db._planELRepository.GetAsync(m => m.Id == studyPlan.Id) == null)
                     {
                         return NotFound();
                     }
@@ -150,7 +150,7 @@ namespace webApp.Controllers
                 return NotFound();
             }
 
-            var studyPlan = await _db._studyPlanRepository.GetAsync(m => m.Id == id);
+            var studyPlan = await _db._planELRepository.GetAsync(m => m.Id == id);
             if (studyPlan == null)
             {
                 return NotFound();
@@ -163,10 +163,10 @@ namespace webApp.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var studyPlan = await _db._studyPlanRepository.GetAsync(m => m.Id == id);
+            var studyPlan = await _db._planELRepository.GetAsync(m => m.Id == id);
             if (studyPlan != null)
             {
-                await _db._studyPlanRepository.DeleteAsync(studyPlan);
+                await _db._planELRepository.DeleteAsync(studyPlan);
             }
 
             return RedirectToAction(nameof(Index));

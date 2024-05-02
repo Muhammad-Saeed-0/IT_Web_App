@@ -19,8 +19,10 @@ namespace webApp.Repository.Implementation
             _requirementRepository = new RequirementRepository(db);
             _requirementCoursesRepository = new RequirementCoursesRepository(db);
             _eventRepository = new EventRepository(db, webHost);
-            _studyPlanRepository = new StudyPlanRepository(db);
-            _studyPlanCoursesRepository = new StudyPlanCoursesRepository(db);
+            _planELRepository = new StudyPlanELRepository(db);
+            _eLCourseRepository = new ELCourseRepository(db);
+            _planPLRepository = new StudyPlanPLRepository(db);
+            _pLCourseRepository = new PLCourseRepository(db);
             _educationalProgramRepository = new EducationalProgramRepository(db);
             _programCoursesRepository = new ProgramCoursesRepository(db);
         }
@@ -37,8 +39,10 @@ namespace webApp.Repository.Implementation
         public IRequirementRepository _requirementRepository { get; private set; }
         public IRequirementCoursesRepository _requirementCoursesRepository { get; private set; }
         public IEventRepository _eventRepository { get; private set; }
-        public IStudyPlanRepository _studyPlanRepository { get; private set; }
-        public IStudyPlanCoursesRepository _studyPlanCoursesRepository { get; private set; }
+        public IStudyPlanELRepository _planELRepository { get; private set; }
+        public IELCourseRepository _eLCourseRepository { get; private set; }
+        public IStudyPlanPLRepository _planPLRepository { get; private set; }
+        public IPLCourseRepository _pLCourseRepository { get; private set; }
         public IEducationalProgramRepository _educationalProgramRepository { get; private set; }
         public IProgramCoursesRepository _programCoursesRepository { get; private set; }
     }

@@ -16,8 +16,10 @@ namespace webApp.Data
         public DbSet<StaffLink> StaffLinks { get; set; }
         public DbSet<ScientificAchievement> ScientificAchievements { get; set; }
         public DbSet<RequirementCourse> RequirementCourses { get; set; }
-        public DbSet<StudyPlan> StudyPlans { get; set; }
-        public DbSet<StudyPlanCourse> StudyPlanCourses { get; set; }
+        public DbSet<StudyPlanEntryLevel> StudyPlanEntryLevels { get; set; }
+        public DbSet<EntryLevelCourse> EntryLevelCourses { get; set; }
+        public DbSet<StudyPlanProgramLevel> StudyPlanProgramLevels { get; set; }
+        public DbSet<ProgramLevelCourse> ProgramLevelCourses { get; set; }
         public DbSet<EducationalProgram> EducationalProgram { get; set; }
         public DbSet<ProgramCourse> ProgramCourses { get; set; }
 
@@ -75,12 +77,14 @@ namespace webApp.Data
             //
             modelBuilder.Entity<Staff>().HasIndex(p => new { p.Email }).IsUnique();
             modelBuilder.Entity<Staff>().HasIndex(p => new { p.Phone }).IsUnique();
-            modelBuilder.Entity<StudyPlan>().HasIndex(p => new { p.Level }).IsUnique();
+            //modelBuilder.Entity<StudyPlanEntryLevel>().HasIndex(p => new { p.Title }).IsUnique();
+            //modelBuilder.Entity<StudyPlanProgramLevel>().HasIndex(p => new { p.Title }).IsUnique();
 
             //
             modelBuilder.Entity<RequirementCourse>().HasKey(p => new { p.CourseCode, p.RequirementId });
             modelBuilder.Entity<ProgramCourse>().HasKey(p => new { p.CourseCode, p.EducationalProgramId });
-            modelBuilder.Entity<StudyPlanCourse>().HasKey(p => new { p.CourseCode, p.StudyPlanId });
+            modelBuilder.Entity<EntryLevelCourse>().HasKey(p => new { p.CourseCode, p.StudyPlanEntryLevelId });
+            modelBuilder.Entity<ProgramLevelCourse>().HasKey(p => new { p.CourseCode, p.StudyPlanProgramLevelId });
 
         }
     }

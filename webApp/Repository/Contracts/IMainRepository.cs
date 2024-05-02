@@ -14,8 +14,10 @@
         IRequirementRepository _requirementRepository { get; }
         IRequirementCoursesRepository _requirementCoursesRepository { get; }
         IEventRepository _eventRepository { get; }
-        IStudyPlanRepository _studyPlanRepository { get; }
-        IStudyPlanCoursesRepository _studyPlanCoursesRepository { get; }
+        IStudyPlanELRepository _planELRepository { get; }
+        IELCourseRepository _eLCourseRepository { get; } 
+        IStudyPlanPLRepository _planPLRepository { get; }
+        IPLCourseRepository _pLCourseRepository { get; }
         IEducationalProgramRepository _educationalProgramRepository { get; }
         IProgramCoursesRepository _programCoursesRepository { get; }
     }
