@@ -57,6 +57,20 @@ namespace webApp.Data
             modelBuilder.Entity<Course>().HasData(
                           new Course { Code = "Hu 212", CourseTitle = "Reading & Presentation Skills", Lecture = 2, PracticalTutorial = 0, Total = 2, Prerequisite = "No Prerequisite", CourseWork = 15, TermExams = 25, OralPractical = 0, FinalExam = 60, ExamTime = 3 });
 
+            modelBuilder.Entity<Course>().HasData(
+                        new Course { Code = "BS 209", CourseTitle = "Operations Research", Lecture = 2, PracticalTutorial = 2, Total = 3, Prerequisite = "BS 104 Prob. and Static.", CourseWork = 15, TermExams = 25, OralPractical = 0, FinalExam = 60, ExamTime = 3 });
+
+            modelBuilder.Entity<Course>().HasData(
+                       new Course { Code = "IT 203", CourseTitle = "Computer Networks", Lecture = 2, PracticalTutorial = 2, Total = 3, Prerequisite = "IT 203 Data Comunications", CourseWork = 15, TermExams = 25, OralPractical = 0, FinalExam = 60, ExamTime = 3 });
+
+            modelBuilder.Entity<Course>().HasData(
+                       new Course { Code = "IT 204", CourseTitle = "Web Programming", Lecture = 2, PracticalTutorial = 2, Total = 3, Prerequisite = "No Prerequisite", CourseWork = 15, TermExams = 25, OralPractical = 0, FinalExam = 60, ExamTime = 3 });
+
+            modelBuilder.Entity<Course>().HasData(
+                      new Course { Code = "CS 313", CourseTitle = "Machine Learning", Lecture = 2, PracticalTutorial = 2, Total = 3, Prerequisite = "CS 103 Object Programming", CourseWork = 15, TermExams = 25, OralPractical = 0, FinalExam = 60, ExamTime = 3 });
+
+            modelBuilder.Entity<Course>().HasData(
+                      new Course { Code = "IS 323", CourseTitle = "Web Applications", Lecture = 2, PracticalTutorial = 2, Total = 3, Prerequisite = "IT 204 Web Programming", CourseWork = 15, TermExams = 25, OralPractical = 0, FinalExam = 60, ExamTime = 3 });
 
             //
             modelBuilder.Entity<Staff>().HasIndex(p => new { p.Email }).IsUnique();

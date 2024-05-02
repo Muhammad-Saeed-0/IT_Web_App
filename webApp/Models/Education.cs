@@ -11,7 +11,7 @@ namespace webApp.Models
         [Required]
         public DateOnly Date { get; set; }
         [Required]
-        public string Description { get; set; }
+        public string Details { get; set; }
 
         [Required]
         public int StaffId { get; set; }

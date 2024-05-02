@@ -17,7 +17,7 @@ namespace webApp.Controllers
 
         public async Task<IActionResult> Index()
         {
-            return View(await _db._educationalProgramRepository.GetAllAsync(includeProperties: "Requirment"));
+            return View(await _db._educationalProgramRepository.GetAllAsync(includeProperties: "Requirement"));
         }
 
         public async Task<IActionResult> Details(int? id)

@@ -42,6 +42,10 @@ namespace webApp.Controllers
                     item.RequirementCourses = await _db._requirementCoursesRepository.GetAllAsync(
                         m => m.RequirementId == item.Id,
                         includeProperties: "Course");
+
+                    item.EducationalPrograms = await _db._educationalProgramRepository.GetAllAsync(
+                        m => m.RequirementId == item.Id,
+                        includeProperties: "ProgramCourses");
                 }
             }
              

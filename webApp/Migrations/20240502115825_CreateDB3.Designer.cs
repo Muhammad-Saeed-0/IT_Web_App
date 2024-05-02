@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using webApp.Data;
 
@@ -11,9 +12,11 @@ using webApp.Data;
 namespace webApp.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240502115825_CreateDB3")]
+    partial class CreateDB3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -173,76 +176,6 @@ namespace webApp.Migrations
                             Prerequisite = "No Prerequisite",
                             TermExams = 25,
                             Total = 2
-                        },
-                        new
-                        {
-                            Code = "BS 209",
-                            CourseTitle = "Operations Research",
-                            CourseWork = 15,
-                            ExamTime = 3,
-                            FinalExam = 60,
-                            Lecture = 2,
-                            OralPractical = 0,
-                            PracticalTutorial = 2,
-                            Prerequisite = "BS 104 Prob. and Static.",
-                            TermExams = 25,
-                            Total = 3
-                        },
-                        new
-                        {
-                            Code = "IT 203",
-                            CourseTitle = "Computer Networks",
-                            CourseWork = 15,
-                            ExamTime = 3,
-                            FinalExam = 60,
-                            Lecture = 2,
-                            OralPractical = 0,
-                            PracticalTutorial = 2,
-                            Prerequisite = "IT 203 Data Comunications",
-                            TermExams = 25,
-                            Total = 3
-                        },
-                        new
-                        {
-                            Code = "IT 204",
-                            CourseTitle = "Web Programming",
-                            CourseWork = 15,
-                            ExamTime = 3,
-                            FinalExam = 60,
-                            Lecture = 2,
-                            OralPractical = 0,
-                            PracticalTutorial = 2,
-                            Prerequisite = "No Prerequisite",
-                            TermExams = 25,
-                            Total = 3
-                        },
-                        new
-                        {
-                            Code = "CS 313",
-                            CourseTitle = "Machine Learning",
-                            CourseWork = 15,
-                            ExamTime = 3,
-                            FinalExam = 60,
-                            Lecture = 2,
-                            OralPractical = 0,
-                            PracticalTutorial = 2,
-                            Prerequisite = "CS 103 Object Programming",
-                            TermExams = 25,
-                            Total = 3
-                        },
-                        new
-                        {
-                            Code = "IS 323",
-                            CourseTitle = "Web Applications",
-                            CourseWork = 15,
-                            ExamTime = 3,
-                            FinalExam = 60,
-                            Lecture = 2,
-                            OralPractical = 0,
-                            PracticalTutorial = 2,
-                            Prerequisite = "IT 204 Web Programming",
-                            TermExams = 25,
-                            Total = 3
                         });
                 });
 
@@ -257,7 +190,7 @@ namespace webApp.Migrations
                     b.Property<DateOnly>("Date")
                         .HasColumnType("date");
 
-                    b.Property<string>("Details")
+                    b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -286,7 +219,7 @@ namespace webApp.Migrations
                     b.Property<string>("Department")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Details")
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("RequirementId")
@@ -427,7 +360,7 @@ namespace webApp.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Details")
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("RegulationCode")
