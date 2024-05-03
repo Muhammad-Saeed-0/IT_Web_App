@@ -9,9 +9,6 @@ namespace webApp.Models
     {
         [Key]
         public int Id { get; set; }
-        //[MaxLength(100)]
-        //[DisplayName("")]
-        //[Range(0, 100, ErrorMessage = " ")]
         [Required]
         public string Name { get; set; }
         [Required]

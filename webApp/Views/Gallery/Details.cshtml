@@ -1,0 +1,20 @@
+﻿@model Gallery
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>News</h4>
+    <hr />
+    <dl class="row">
+        <dd class = "col-sm-10">
+            <img alt="..." src="@Html.DisplayFor(model => model.ImgUrl)" />
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

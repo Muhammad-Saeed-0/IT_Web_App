@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Gallery>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Gallery</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@{
+    foreach (var item in Model)
+    {
+        <div class="col-sm-4 h-25 w-25 m-3" style="display: inline-block">
+            <div class="card">
+                <div class="card-body">
+                    <img class="card-img-top" src="@item.ImgUrl" alt="Card image cap">
+                    <div class="card-body">
+                        <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+

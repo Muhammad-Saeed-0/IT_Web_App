@@ -22,6 +22,7 @@ namespace webApp.Data
         public DbSet<ProgramLevelCourse> ProgramLevelCourses { get; set; }
         public DbSet<EducationalProgram> EducationalProgram { get; set; }
         public DbSet<ProgramCourse> ProgramCourses { get; set; }
+        public DbSet<Gallery> Gallery { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

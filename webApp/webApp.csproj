@@ -20,6 +20,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\images\events\" />
     <Folder Include="wwwroot\images\news\" />
+    <Folder Include="wwwroot\images\gallery\" />
     <Folder Include="wwwroot\pdfs\researches\" />
   </ItemGroup>
 

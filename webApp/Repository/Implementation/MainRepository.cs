@@ -25,6 +25,7 @@ namespace webApp.Repository.Implementation
             _pLCourseRepository = new PLCourseRepository(db);
             _educationalProgramRepository = new EducationalProgramRepository(db);
             _programCoursesRepository = new ProgramCoursesRepository(db);
+            _galleryRepository = new GalleryRepository(db, webHost);
         }
 
         public IStaffRepository _staffRepository { get; private set; }
@@ -45,5 +46,6 @@ namespace webApp.Repository.Implementation
         public IPLCourseRepository _pLCourseRepository { get; private set; }
         public IEducationalProgramRepository _educationalProgramRepository { get; private set; }
         public IProgramCoursesRepository _programCoursesRepository { get; private set; }
+        public IGalleryRepository _galleryRepository { get; private set; }
     }
 }

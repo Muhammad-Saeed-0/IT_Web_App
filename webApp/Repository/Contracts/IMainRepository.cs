@@ -20,5 +20,6 @@
         IPLCourseRepository _pLCourseRepository { get; }
         IEducationalProgramRepository _educationalProgramRepository { get; }
         IProgramCoursesRepository _programCoursesRepository { get; }
+        IGalleryRepository _galleryRepository { get; }
     }
 }
