@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public string Title { get; set; }
+        public int TotalHours { get; set; }
         public string Details { get; set; }
 
         public string RegulationCode { get; set; }
